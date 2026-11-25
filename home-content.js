@@ -5,11 +5,21 @@
   function media(path) {
     if (typeof path !== 'string' || !path.trim()) return '';
     if (/^https?:\/\//i.test(path)) return path;
-    // CMS writes /assets/foo.jpg or /videos/foo.mp4; these must also work
-    // on Github Pages websites published under /repository-name/.
-    const p = path.replace(/^(\.\.\/)+/, '').replace(/^\/?(?:\.\/)?/, '');
-    if (!/^(assets|videos)\/[A-Za-z0-9_\-./%]+$/.test(p) || p.includes('..')) return '';
-    return siteRoot + p;
+    // GitHub image uploads may contain spaces, parentheses, Unicode, etc.
+    // Encode each filename segment for the browser while rejecting path traversal.
+    const raw = path.trim().replace(/^(\.\.\/)+/, '').replace(/^\/?(?:\.\/)?/, '');
+    if (!/^(assets|videos)\//.test(raw)) return '';
+    const segments = raw.split('/');
+    if (segments.some(s => !s)) return '';
+    const encoded = [];
+    for (const segment of segments) {
+      let name;
+      try { name = decodeURIComponent(segment); }
+      catch { name = segment; }
+      if (name === '.' || name === '..' || name.includes('/') || name.includes('\\')) return '';
+      encoded.push(encodeURIComponent(name));
+    }
+    return siteRoot + encoded.join('/');
   }
   const put = (node, text) => { if(node && text !== undefined && text !== null) node.textContent = String(text); };
   const visibleList = v => Array.isArray(v) ? v.filter(x => typeof x === 'string' && x.trim()) : [];

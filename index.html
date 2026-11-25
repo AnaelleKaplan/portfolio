@@ -47,7 +47,7 @@
     .memory-photo{--rot:0deg;position:absolute;top:var(--top);left:var(--left);width:var(--w);aspect-ratio:var(--aspect,4 / 3);padding:9px 9px 23px;background:#e9dfcf;box-shadow:8px 20px 40px #0007;transform:translate3d(0,var(--shift,0px),0) rotate(var(--rot));pointer-events:none}
     .hero.is-animating .memory-photo{will-change:transform}
     .season.is-animating .falling-leaf{will-change:transform}
-    .memory-photo img{width:100%;height:100%;object-fit:cover;filter:saturate(.76) sepia(.07) contrast(.95)}
+    .memory-photo img{width:100%;height:100%;object-fit:cover;filter:none}
     .memory-photo:nth-child(3n){padding:8px 8px 20px;background:#d6c4aa}.memory-photo:nth-child(4n){background:#f2e9dc}
     .photo-vignette{position:sticky;top:calc(100vh - 80px);height:80px;margin-top:-80px;background:linear-gradient(transparent,#1d1b2054);pointer-events:none;z-index:4}
     .season{position:relative;z-index:2;isolation:isolate;background:transparent}
@@ -57,7 +57,7 @@
     .autumn-arch img{width:100%;height:auto;display:block;image-rendering:pixelated;filter:drop-shadow(0 12px 12px #09060720)}
     .about-inner{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:minmax(280px,390px) 1fr;align-items:center;gap:clamp(30px,7vw,120px);position:relative;z-index:5;padding-top:66px}
     .portrait{position:relative;padding:10px;background:#ba9873;transform:rotate(-2deg);box-shadow:16px 22px 60px #0008}
-    .portrait img{height:470px;object-fit:cover;filter:saturate(.89)}
+    .portrait img{height:470px;object-fit:cover;filter:none}
     .portrait::after{content:'';position:absolute;left:25px;right:25px;bottom:-14px;height:32px;background:#e3c69888;clip-path:polygon(3% 10%,98% 0,96% 97%,0 89%);transform:rotate(-3deg)}
     .about-copy h1{font-weight:400;font-size:clamp(52px,6.5vw,86px);line-height:.98;margin:0 0 27px;letter-spacing:-.035em}
     .about-copy h1 em{color:#ffc688;font-style:normal}
@@ -89,7 +89,7 @@
     .journal-entry{cursor:pointer;display:grid;grid-template-columns:minmax(290px,1.15fr) minmax(180px,1fr);align-items:center;gap:clamp(22px,3vw,48px);padding:0;border:0;background:transparent;text-align:left;color:var(--paperink);width:100%}
     .sketch-photo{position:relative;display:block;padding:8px;border:2px solid #795b4290;border-radius:3px 5px 2px 5px;background:#f7e9cb80;box-shadow:3px 6px 1px #8b694b26;transform:rotate(var(--tilt,-.6deg));transition:transform .3s,box-shadow .3s}
     .journal-entry:hover .sketch-photo{transform:rotate(0deg) translateY(-4px);box-shadow:3px 13px 12px #8b694b30}
-    .sketch-photo img{width:100%;aspect-ratio:16 / 9;object-fit:cover;filter:sepia(.07) saturate(.93)}
+    .sketch-photo img{width:100%;aspect-ratio:16 / 9;object-fit:cover;filter:none}
     .sketch-photo::before,.sketch-photo::after{content:'';position:absolute;z-index:2;width:66px;height:25px;background:linear-gradient(135deg,#e0ca9fa8,#f7e9d2bb,#d7bb88ad);border:1px solid #a68a633c;box-shadow:0 1px 2px #0001}
     .sketch-photo::before{left:-17px;top:-10px;transform:rotate(-39deg)}
     .sketch-photo::after{right:-18px;bottom:-7px;transform:rotate(-38deg)}
@@ -109,7 +109,7 @@
     .masonry{column-count:3;column-gap:16px;max-width:1320px;margin:auto;padding:0 26px}
     .image-tile{display:block;position:relative;width:100%;break-inside:avoid;margin:0 0 18px;padding:0;border:0;background:#302b2b;overflow:hidden;box-shadow:0 9px 20px #0005;transform:rotate(var(--tilt,0deg));transition:transform .3s}
     .image-tile:hover{transform:rotate(0deg) translateY(-3px)}
-    .image-tile img{width:100%;height:var(--image-height,280px);object-fit:cover;filter:saturate(.87) contrast(.98)}
+    .image-tile img{width:100%;height:var(--image-height,280px);object-fit:cover;filter:none}
     .image-tile:nth-child(6n+1) img{--image-height:245px}
     .image-tile:nth-child(6n+2) img{--image-height:405px}
     .image-tile:nth-child(6n+3) img{--image-height:290px}
