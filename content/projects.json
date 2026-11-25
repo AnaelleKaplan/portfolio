@@ -26,70 +26,63 @@
     "external_url": "https://anaellekaplan.wixsite.com/trust-the-plan"
   },
   {
-    "slug": "between-the-trees",
-    "title": "Between the Trees",
+    "slug": "the-stranger",
+    "title": "Path of The Stranger",
     "type": "Video Game",
-    "tag": "Fantasy · Exploration",
+    "tag": "Fantasy · Exploration · Story",
     "subtitle": "Somewhere between adventure and memory.",
     "summary": "Somewhere between adventure and memory.",
     "description": [
-      "A placeholder for a narrative game built around exploration, environmental storytelling, and the feeling of discovering something just beyond the familiar.",
-      "Use this page to share your gameplay trailer, the core idea behind the game, and a gallery of characters, environments, and development work."
+      "A narrative game where you play as a stranger in a new town. As you learn your way of settling down, you find out that this town is perhaps not as quiet as it first seemed. "
     ],
-    "image": "/assets/fantasy_ruins.webp",
+    "image": "/assets/Screenshot 2026-11-25 at 21.42.59.jpg",
     "gallery": [
-      "/assets/fantasy_ruins.webp",
-      "/assets/world_mountain.webp",
-      "/assets/world_falls.webp",
-      "/assets/stills_woods.webp",
-      "/assets/world_cozy.webp",
-      "/assets/cottage_game.webp"
-    ],
-    "video": "/videos/between-the-trees.mp4",
-    "video_caption": "Temporary animated placeholder · Replace with your project video"
+      "/assets/Screenshot 2026-11-25 at 21.44.19.jpg",
+      "/assets/Screenshot 2026-11-25 at 21.45.36.jpg",
+      "/assets/Screenshot 2026-11-25 at 21.44.34.jpg",
+      "/assets/Screenshot 2026-11-25 at 21.43.40.jpg",
+      "/assets/Screenshot 2026-11-25 at 21.44.53.jpg",
+      "/assets/Screenshot 2026-11-25 at 21.45.50.jpg",
+      "/assets/Screenshot 2026-11-25 at 21.46.37.jpg",
+      "/assets/Screenshot 2026-11-25 at 22.06.17.jpg"
+    ]
   },
   {
-    "slug": "a-place-to-return-to",
-    "title": "A Place to Return To",
-    "type": "Worldbuilding",
-    "tag": "Environment design · Atmosphere",
+    "slug": "the-stranger-vr",
+    "title": "The Stranger VR",
+    "type": "Video Game",
+    "tag": "Virtual Reality · Atmosphere",
     "subtitle": "Little worlds with stories of their own.",
     "summary": "Little worlds with stories of their own.",
     "description": [
-      "An exploration of spaces designed to feel lived in, from little houses and paths to places that suggest stories without explaining them.",
-      "The video area can hold a short environment flythrough, while the gallery can show wide establishing views, close-up details, and different stages of the build."
+      "An exploration of gameplay in virtual reality."
     ],
-    "image": "/assets/cottage_game.webp",
+    "image": "/assets/Screenshot 2026-11-25 at 22.07.29.jpg",
     "gallery": [
-      "/assets/cottage_game.webp",
-      "/assets/world_cozy.webp",
-      "/assets/world_minecraft.webp",
-      "/assets/world_mountain.webp",
-      "/assets/world_falls.webp",
-      "/assets/fantasy_ruins.webp"
-    ],
-    "video": "/videos/a-place-to-return-to.mp4",
-    "video_caption": "Temporary animated placeholder · Replace with your project video"
+      "/assets/Screenshot 2026-11-25 at 22.08.24.jpg",
+      "/assets/Screenshot 2026-11-25 at 22.08.44.jpg",
+      "/assets/Screenshot 2026-11-25 at 22.09.00.jpg",
+      "/assets/Screenshot 2026-11-25 at 22.09.23.jpg",
+      "/assets/Screenshot 2026-11-25 at 22.07.51.jpg"
+    ]
   },
   {
-    "slug": "dragon-forest-scene",
-    "title": "Dragon Forest Scene",
-    "type": "Creative Project",
-    "tag": "World design · Physical craft",
-    "subtitle": "One small fantasy world, built by hand.",
-    "summary": "One small fantasy world, built by hand.",
+    "slug": "market-run",
+    "title": "Market Run",
+    "type": "Video Game",
+    "tag": "World design · 2D Gameplay",
+    "subtitle": "Who am I? That's not important.",
+    "summary": "Who am I? That's not important.",
     "description": [
-      "A small fantasy scene featuring an illuminated lantern, a sleeping dragon, and an old ruin. The original build explores how miniature environments can suggest a story through a few carefully placed details.",
-      "This page can feature a short demonstration of the finished object alongside process photographs, sketches, 3D modelling work, and final close-ups."
+      "A fantasy 2D game experimenting with the mechanics of 2D through layered gameplay."
     ],
-    "image": "/assets/world_falls.webp",
+    "image": "/assets/Screenshot 2026-11-25 at 22.01.40.jpg",
     "gallery": [
-      "/assets/world_falls.webp",
-      "/assets/fantasy_ruins.webp",
-      "/assets/cottage_game.webp",
-      "/assets/world_cozy.webp",
-      "/assets/world_mountain.webp",
-      "/assets/stills_woods.webp"
+      "/assets/Screenshot 2026-11-25 at 22.01.57.jpg",
+      "/assets/Screenshot 2026-11-25 at 22.02.12.jpg",
+      "/assets/Screenshot 2026-11-25 at 22.02.35.jpg",
+      "/assets/Screenshot 2026-11-25 at 22.02.50.jpg",
+      "/assets/Screenshot 2026-11-25 at 22.04.05.jpg"
     ],
     "video": "/videos/dragon-forest-scene.mp4",
     "video_caption": "Temporary animated placeholder · Replace with your project video"
