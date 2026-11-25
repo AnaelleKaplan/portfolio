@@ -1,0 +1,181 @@
+# Pages CMS — edit site content at https://app.pagescms.org
+# This file must stay in your GitHub repository root.
+media:
+  - name: images
+    label: Photos and artwork
+    input: assets
+    output: /assets
+    categories: [image]
+    rename: safe
+  - name: videos
+    label: Video clips
+    input: videos
+    output: /videos
+    categories: [video]
+    extensions: [mp4, webm]
+    rename: safe
+content:
+  - name: site
+    label: About, contact and galleries
+    type: file
+    path: content/site.json
+    format: json
+    operations:
+      delete: false
+    fields:
+      - name: site_name
+        label: Name on the website
+        type: string
+        required: true
+      - name: about_heading_prefix
+        label: About heading introduction
+        type: string
+      - name: about_heading_highlight
+        label: About heading highlighted name
+        type: string
+      - name: about_paragraphs
+        label: About paragraphs
+        type: text
+        list: true
+      - name: portrait
+        label: About portrait
+        type: image
+        options:
+          media: images
+      - name: creative_fields
+        label: Creative specialties
+        type: string
+        list: true
+      - name: tools
+        label: Software and tools
+        type: string
+        list: true
+      - name: contact_kicker
+        label: Small contact introduction
+        type: string
+      - name: contact_heading_prefix
+        label: Contact heading first half
+        type: string
+      - name: contact_heading_highlight
+        label: Contact heading highlighted text
+        type: string
+      - name: contact_text
+        label: Contact description
+        type: text
+      - name: contact_email
+        label: Contact email
+        type: string
+      - name: nav_about_image
+        label: Memory menu — About
+        type: image
+        options:
+          media: images
+      - name: nav_projects_image
+        label: Memory menu — Projects
+        type: image
+        options:
+          media: images
+      - name: nav_stills_image
+        label: Memory menu — Stills
+        type: image
+        options:
+          media: images
+      - name: nav_worlds_image
+        label: Memory menu — Worlds
+        type: image
+        options:
+          media: images
+      - name: memories
+        label: Opening photographs (up to 12)
+        description: The existing collage has twelve positions; upload or reorder up to twelve images.
+        type: image
+        options:
+          media: images
+          multiple:
+            max: 12
+      - name: stills
+        label: Cinematic stills gallery
+        type: image
+        options:
+          media: images
+          multiple:
+            max: 24
+      - name: worlds
+        label: Worldbuilding gallery
+        type: image
+        options:
+          media: images
+          multiple:
+            max: 24
+  - name: projects
+    label: Projects — journal and pages
+    type: file
+    path: content/projects.json
+    format: json
+    list: true
+    operations:
+      delete: false
+    fields:
+      - name: slug
+        label: Project ID (do not change after publishing)
+        type: string
+        required: true
+        description: Lowercase letters and dashes, such as trust-the-plan. Existing links use this ID.
+        pattern: "^[a-z0-9]+(-[a-z0-9]+)*$"
+      - name: title
+        label: Project title
+        type: string
+        required: true
+      - name: type
+        label: Project category
+        type: select
+        options:
+          values: [Video Game, Short Film, Interactive Film, Worldbuilding, Creative Project, Other]
+      - name: tag
+        label: Project focus / keywords
+        type: string
+      - name: subtitle
+        label: Subtitle on the project page
+        type: string
+      - name: summary
+        label: Short journal description
+        type: text
+      - name: description
+        label: Project-page paragraphs
+        type: text
+        list: true
+      - name: image
+        label: Project thumbnail and video poster
+        type: image
+        options:
+          media: images
+      - name: gallery
+        label: Project gallery images
+        type: image
+        options:
+          media: images
+          multiple:
+            max: 24
+      - name: video
+        label: Uploaded video file (optional)
+        type: file
+        options:
+          media: videos
+          categories: [video]
+          extensions: [mp4, webm]
+      - name: embed_url
+        label: YouTube or Vimeo URL instead of uploaded video (optional)
+        type: string
+        description: Supports normal YouTube, youtu.be and Vimeo video URLs.
+      - name: video_caption
+        label: Caption underneath the video
+        type: string
+      - name: external_label
+        label: Link button text (optional)
+        type: string
+      - name: external_url
+        label: Project link URL (optional)
+        type: string
+      - name: external_note
+        label: Small note under the link
+        type: text
