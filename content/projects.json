@@ -5,26 +5,25 @@
     "type": "Video Game",
     "tag": "Narrative game · Live-action cutscenes · Strategy",
     "subtitle": "A story about friendship, imagination, and the fear of being left behind.",
+    "summary": "A narrative-driven video game combining live-action cutscenes with strategy gameplay.",
     "description": [
       "Trust The Plan is a narrative-driven video game that combines live-action cutscenes with turn-based strategy gameplay. Between battles, a coming-of-age story unfolds through the characters and their changing friendships.",
       "The project explores how imagination and gameplay can reveal what characters struggle to say aloud. Players experience both the fictional adventure and the relationships unfolding around it."
     ],
-    "image": "/assets/friends_sunset.webp",
+    "image": "/assets/Trust_the_Plan_Exact_Frame_Reference_Lighting.jpg",
     "gallery": [
-      "/assets/friends_sunset.webp",
-      "/assets/stills_people.webp",
-      "/assets/cinema_faces.webp",
-      "/assets/warm_field.webp",
-      "/assets/portrait.webp",
-      "/assets/orange_sunset.webp"
+      "/assets/style.jpg",
+      "/assets/Intro Cutscene.00_00_22_11542.Still006.jpeg",
+      "/assets/Intro Cutscene.00_01_42_02468.Still003.jpeg",
+      "/assets/Intro Cutscene.00_02_19_37086.Still002.jpeg",
+      "/assets/Intro Cutscene.00_02_12_29668.Still001.jpeg",
+      "/assets/Screenshot 2026-03-27 at 12.53.21.jpg",
+      "/assets/Screenshot 2026-03-09 at 15.24.46.jpg",
+      "/assets/Screenshot 2026-03-09 at 15.29.33.jpg",
+      "/assets/Screenshot 2026-03-09 at 15.25.19.jpg"
     ],
-    "video": "/videos/trust-the-plan.mp4",
-    "summary": "A narrative-driven video game combining live-action cutscenes with strategy gameplay.",
-    "video_caption": "Temporary animated placeholder · Replace with the game demo",
-    "embed_url": "",
-    "external_label": "",
-    "external_url": "",
-    "external_note": ""
+    "external_label": "Project Website",
+    "external_url": "https://anaellekaplan.wixsite.com/trust-the-plan"
   },
   {
     "slug": "between-the-trees",
@@ -32,6 +31,7 @@
     "type": "Video Game",
     "tag": "Fantasy · Exploration",
     "subtitle": "Somewhere between adventure and memory.",
+    "summary": "Somewhere between adventure and memory.",
     "description": [
       "A placeholder for a narrative game built around exploration, environmental storytelling, and the feeling of discovering something just beyond the familiar.",
       "Use this page to share your gameplay trailer, the core idea behind the game, and a gallery of characters, environments, and development work."
@@ -46,12 +46,7 @@
       "/assets/cottage_game.webp"
     ],
     "video": "/videos/between-the-trees.mp4",
-    "summary": "Somewhere between adventure and memory.",
-    "video_caption": "Temporary animated placeholder · Replace with your project video",
-    "embed_url": "",
-    "external_label": "",
-    "external_url": "",
-    "external_note": ""
+    "video_caption": "Temporary animated placeholder · Replace with your project video"
   },
   {
     "slug": "a-place-to-return-to",
@@ -59,6 +54,7 @@
     "type": "Worldbuilding",
     "tag": "Environment design · Atmosphere",
     "subtitle": "Little worlds with stories of their own.",
+    "summary": "Little worlds with stories of their own.",
     "description": [
       "An exploration of spaces designed to feel lived in, from little houses and paths to places that suggest stories without explaining them.",
       "The video area can hold a short environment flythrough, while the gallery can show wide establishing views, close-up details, and different stages of the build."
@@ -73,12 +69,7 @@
       "/assets/fantasy_ruins.webp"
     ],
     "video": "/videos/a-place-to-return-to.mp4",
-    "summary": "Little worlds with stories of their own.",
-    "video_caption": "Temporary animated placeholder · Replace with your project video",
-    "embed_url": "",
-    "external_label": "",
-    "external_url": "",
-    "external_note": ""
+    "video_caption": "Temporary animated placeholder · Replace with your project video"
   },
   {
     "slug": "dragon-forest-scene",
@@ -86,6 +77,7 @@
     "type": "Creative Project",
     "tag": "World design · Physical craft",
     "subtitle": "One small fantasy world, built by hand.",
+    "summary": "One small fantasy world, built by hand.",
     "description": [
       "A small fantasy scene featuring an illuminated lantern, a sleeping dragon, and an old ruin. The original build explores how miniature environments can suggest a story through a few carefully placed details.",
       "This page can feature a short demonstration of the finished object alongside process photographs, sketches, 3D modelling work, and final close-ups."
@@ -100,12 +92,7 @@
       "/assets/stills_woods.webp"
     ],
     "video": "/videos/dragon-forest-scene.mp4",
-    "summary": "One small fantasy world, built by hand.",
-    "video_caption": "Temporary animated placeholder · Replace with your project video",
-    "embed_url": "",
-    "external_label": "",
-    "external_url": "",
-    "external_note": ""
+    "video_caption": "Temporary animated placeholder · Replace with your project video"
   },
   {
     "slug": "last-summer-tape",
@@ -113,6 +100,7 @@
     "type": "Short Film",
     "tag": "Memory · Cinematography",
     "subtitle": "Some summers stay with you.",
+    "summary": "Some summers stay with you.",
     "description": [
       "An example page for a film about how a place can feel completely different once you know you are leaving it behind.",
       "Your final film page might include a trailer or complete short, a few lines about the story, your cinematography approach, and a selection of your favourite shots."
@@ -127,12 +115,7 @@
       "/assets/lake_sunset.webp"
     ],
     "video": "/videos/last-summer-tape.mp4",
-    "summary": "Some summers stay with you.",
-    "video_caption": "Temporary animated placeholder · Replace with your project video",
-    "embed_url": "",
-    "external_label": "",
-    "external_url": "",
-    "external_note": ""
+    "video_caption": "Temporary animated placeholder · Replace with your project video"
   },
   {
     "slug": "lantern-paths",
@@ -140,6 +123,7 @@
     "type": "Worldbuilding",
     "tag": "Minecraft · Game environments",
     "subtitle": "Warm windows and worlds worth wandering through.",
+    "summary": "Warm windows and worlds worth wandering through.",
     "description": [
       "A placeholder collection of cozy game spaces, handmade villages, lantern-lit trails, and small details that make an imagined world feel like home.",
       "A future version could use a short Minecraft flythrough or gameplay recording, followed by images of the builds from different angles and at different times of day."
@@ -154,11 +138,6 @@
       "/assets/world_mountain.webp"
     ],
     "video": "/videos/lantern-paths.mp4",
-    "summary": "Warm windows and worlds worth wandering through.",
-    "video_caption": "Temporary animated placeholder · Replace with your project video",
-    "embed_url": "",
-    "external_label": "",
-    "external_url": "",
-    "external_note": ""
+    "video_caption": "Temporary animated placeholder · Replace with your project video"
   }
 ]
