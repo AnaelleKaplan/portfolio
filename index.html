@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#1b1b20" />
+  <title>Anaelle Kaplan — Stories, Stills & Worlds</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght,SOFT,WONK@9..144,400,0,1;9..144,500,0,1;9..144,600,0,1&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#1a1a1f;--bg2:#232127;--ink:#f2eadc;--dim:#cfc0ac;--gold:#f3c281;--paperink:#563d2d;--red:#822d32}
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth;overflow-x:clip}
+    body{margin:0;background:#1d1b20;color:var(--ink);font-family:'DM Sans',Arial,sans-serif;overflow-x:hidden}
+    button,a{font:inherit;color:inherit}button{cursor:pointer}a{text-decoration:none}
+    img{display:block;width:100%}.serif,h1,h2,h3{font-family:Fraunces,Georgia,serif}
+    :focus-visible{outline:3px solid #f3c281;outline-offset:3px}
+    .light-ambient{position:fixed;inset:-4vh -5vw -10vh;z-index:0;pointer-events:none;opacity:.92;transform:translate3d(0,var(--light-y,0px),0);mix-blend-mode:screen;will-change:transform}
+    .light-ambient svg{width:100%;height:100%;display:block}
+    .grain{pointer-events:none;position:fixed;inset:0;opacity:.06;z-index:8;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 150 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='150' height='150' filter='url(%23f)' opacity='.24'/%3E%3C/svg%3E")}
+    .topnav{position:fixed;left:0;right:0;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:26px;padding:12px clamp(20px,4vw,66px);background:linear-gradient(to bottom,#16151be8,#18171ab8);border-bottom:1px solid #ffffff13;backdrop-filter:none}
+    .logo{font-family:Fraunces,Georgia,serif;font-size:18px;letter-spacing:-.035em;white-space:nowrap}
+    .navlinks{display:flex;align-items:center;gap:clamp(10px,1.8vw,28px)}
+    .nav-link{display:flex;align-items:center;gap:8px;font-size:10px;text-transform:uppercase;letter-spacing:.13em;white-space:nowrap;transition:color .2s}
+    .nav-link:hover{color:var(--gold)}
+    .nav-polaroid{width:25px;height:31px;padding:2px 2px 6px;flex-shrink:0;transform:rotate(-6deg) scale(.84);border-radius:1px;background:#665c54;opacity:.34;filter:grayscale(1);transition:transform .45s,opacity .45s,background .45s,filter .45s;box-shadow:0 3px 8px #0006}
+    .nav-polaroid img{height:100%;object-fit:cover}
+    .nav-link.found .nav-polaroid{opacity:1;filter:none;background:#f1e9d9;transform:rotate(4deg) scale(1)}
+    .nav-link.found{color:#ead7bc}
+    /* A tiny found-memory note rather than a notification card. */
+    .toast{position:fixed;right:clamp(16px,4vw,58px);top:69px;z-index:120;display:flex;align-items:center;gap:10px;
+      min-width:174px;max-width:min(260px,calc(100vw - 30px));padding:9px 15px 10px 13px;
+      color:#ebd1a4;background:linear-gradient(130deg,#302820ee,#322b29eb 66%,#3a2d28e8);
+      box-shadow:0 7px 18px #08070936;clip-path:polygon(0 10%,12% 5%,30% 8%,57% 3%,77% 7%,100% 0,99% 91%,87% 98%,56% 95%,34% 100%,0 94%);
+      opacity:0;transform:translateY(-7px) rotate(-1.4deg);pointer-events:none;
+      transition:opacity .26s ease,transform .32s ease;}
+    .toast.show{opacity:.96;transform:translateY(0) rotate(-.7deg)}
+    .toast-symbol{font-family:Georgia,serif;font-size:21px;line-height:1;color:#c89b61;opacity:.75}
+    .toast-lines{display:flex;flex-direction:column;gap:1px;line-height:1.2}
+    .toast-lines small{font-family:Georgia,serif;font-style:italic;font-size:12px;letter-spacing:.012em;color:#e1c49b}
+    .toast-lines strong{font-family:Fraunces,Georgia,serif;font-size:13px;font-weight:400;color:#f3e5ce;letter-spacing:.065em}
+    .hero{position:relative;z-index:1;height:250vh;isolation:isolate;background:transparent}
+    .photo-stage{position:sticky;top:0;height:100vh;overflow:hidden;isolation:isolate}
+    .photo-stage::after{content:'';position:absolute;inset:auto 0 0;height:20vh;background:linear-gradient(transparent,#1d1b2070);pointer-events:none;z-index:5}
+    .memory-photo{--rot:0deg;position:absolute;top:var(--top);left:var(--left);width:var(--w);aspect-ratio:var(--aspect,4 / 3);padding:9px 9px 23px;background:#e9dfcf;box-shadow:8px 20px 40px #0007;transform:translate3d(0,var(--shift,0px),0) rotate(var(--rot));pointer-events:none}
+    .hero.is-animating .memory-photo{will-change:transform}
+    .season.is-animating .falling-leaf{will-change:transform}
+    .memory-photo img{width:100%;height:100%;object-fit:cover;filter:saturate(.76) sepia(.07) contrast(.95)}
+    .memory-photo:nth-child(3n){padding:8px 8px 20px;background:#d6c4aa}.memory-photo:nth-child(4n){background:#f2e9dc}
+    .photo-vignette{position:sticky;top:calc(100vh - 80px);height:80px;margin-top:-80px;background:linear-gradient(transparent,#1d1b2054);pointer-events:none;z-index:4}
+    .season{position:relative;z-index:2;isolation:isolate;background:transparent}
+    .about{position:relative;min-height:710px;padding:165px clamp(20px,7vw,110px) 80px;background:transparent;overflow:visible}
+    .about::before{content:'';position:absolute;inset:-320px 0 0;background:radial-gradient(ellipse at 78% 22%,#d8a36314,transparent 55%);pointer-events:none}
+    .autumn-arch{position:absolute;z-index:4;top:clamp(-220px,-12vw,-125px);left:-2.5vw;width:105vw;pointer-events:none;transform:translate3d(0,var(--arch-parallax,0px),0)}
+    .autumn-arch img{width:100%;height:auto;display:block;image-rendering:pixelated;filter:drop-shadow(0 12px 12px #09060720)}
+    .about-inner{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:minmax(280px,390px) 1fr;align-items:center;gap:clamp(30px,7vw,120px);position:relative;z-index:5;padding-top:66px}
+    .portrait{position:relative;padding:10px;background:#ba9873;transform:rotate(-2deg);box-shadow:16px 22px 60px #0008}
+    .portrait img{height:470px;object-fit:cover;filter:saturate(.89)}
+    .portrait::after{content:'';position:absolute;left:25px;right:25px;bottom:-14px;height:32px;background:#e3c69888;clip-path:polygon(3% 10%,98% 0,96% 97%,0 89%);transform:rotate(-3deg)}
+    .about-copy h1{font-weight:400;font-size:clamp(52px,6.5vw,86px);line-height:.98;margin:0 0 27px;letter-spacing:-.035em}
+    .about-copy h1 em{color:#ffc688;font-style:normal}
+    .about-copy p{font-size:15px;line-height:1.9;max-width:520px;color:#e2d7c7;margin:0 0 15px}
+        .tiny-tags{display:flex;gap:16px;flex-wrap:wrap;margin-top:20px}
+    .tiny-tags span{position:relative;padding:2px 0 6px;font-family:Georgia,serif;font-size:14px;letter-spacing:.015em;color:#dfc4a0;font-style:italic}
+    .tiny-tags span:not(:last-child)::after{content:'✦';position:absolute;right:-12px;top:3px;font-size:9px;color:#976f4e;opacity:.7}
+    .tools{margin-top:29px;max-width:620px}
+    .tools-label{font-family:Fraunces,Georgia,serif;font-weight:400;font-size:17px;color:#deb887;margin:0 0 13px;letter-spacing:.015em}
+    .tools-list{list-style:none;margin:0;padding:0;display:flex;align-items:baseline;flex-wrap:wrap;gap:10px 5px;color:#d9d1c5}
+    .tools-list li{display:flex;align-items:baseline;gap:6px;font-size:12px;letter-spacing:.03em}
+    .tools-list li:not(:last-child)::after{content:'·';color:#bc8350;font-family:Georgia,serif;margin-left:5px;font-size:16px}
+    .tools-list em{font-family:Georgia,serif;color:#f1d6b0;font-size:13px;font-style:normal}
+
+    .falling-layer{position:absolute;inset:0;z-index:9;pointer-events:none;overflow:hidden}
+    .falling-leaf{position:absolute;top:0;left:var(--x);width:var(--size,28px);transform:translate3d(0,0,0);opacity:.9;filter:drop-shadow(1px 2px 1px #0f090828)}
+    .falling-leaf img{width:100%;image-rendering:pixelated}
+    .projects{position:relative;padding:15px 0 82px;background:transparent}
+    .section-heading{font-size:clamp(40px,5vw,62px);font-weight:400;letter-spacing:-.035em;line-height:1.05;margin:0 auto 34px;max-width:1320px;padding:0 30px;color:#dfbc8d}
+    .image-section .section-heading::after{content:'✧ ─────';display:block;font-family:Georgia,serif;color:#a67850;font-size:15px;font-weight:400;letter-spacing:.2em;margin-top:8px}
+    .projects>.section-heading{display:none}
+    .book-wrap{position:relative;width:calc(100vw + 20px);margin-left:-10px}
+    .journal{position:relative;min-height:1250px;padding:clamp(84px,10vw,132px) clamp(250px,18vw,360px) 155px clamp(85px,10vw,162px);isolation:isolate;color:var(--paperink)}
+    .journal::before{content:'';position:absolute;inset:0;z-index:-1;border:120px solid transparent;border-image-source:url('assets/journal.webp');border-image-slice:150 110 140 120 fill;border-image-width:135px 102px 130px 110px;border-image-repeat:stretch;pointer-events:none;filter:drop-shadow(0 16px 20px #0006)}.journal::after{content:'';position:absolute;left:46px;top:38px;width:min(290px,36vw);height:118px;background:linear-gradient(180deg,rgba(237,214,176,.48),rgba(237,214,176,.16));filter:blur(5px);border-radius:26px;pointer-events:none;mix-blend-mode:screen}
+    .journal-intro{position:relative;padding:4px 0 28px;max-width:100%}
+    .journal-intro .overline{display:none}
+    .journal-intro h2{font-size:clamp(44px,5.4vw,74px);line-height:1.02;font-weight:500;margin:6px 0 0;letter-spacing:-.04em}
+    .journal-list{display:flex;flex-direction:column;gap:42px;max-width:100%;position:relative}
+    .journal-entry{cursor:pointer;display:grid;grid-template-columns:minmax(290px,1.15fr) minmax(180px,1fr);align-items:center;gap:clamp(22px,3vw,48px);padding:0;border:0;background:transparent;text-align:left;color:var(--paperink);width:100%}
+    .sketch-photo{position:relative;display:block;padding:8px;border:2px solid #795b4290;border-radius:3px 5px 2px 5px;background:#f7e9cb80;box-shadow:3px 6px 1px #8b694b26;transform:rotate(var(--tilt,-.6deg));transition:transform .3s,box-shadow .3s}
+    .journal-entry:hover .sketch-photo{transform:rotate(0deg) translateY(-4px);box-shadow:3px 13px 12px #8b694b30}
+    .sketch-photo img{width:100%;aspect-ratio:16 / 9;object-fit:cover;filter:sepia(.07) saturate(.93)}
+    .sketch-photo::before,.sketch-photo::after{content:'';position:absolute;z-index:2;width:66px;height:25px;background:linear-gradient(135deg,#e0ca9fa8,#f7e9d2bb,#d7bb88ad);border:1px solid #a68a633c;box-shadow:0 1px 2px #0001}
+    .sketch-photo::before{left:-17px;top:-10px;transform:rotate(-39deg)}
+    .sketch-photo::after{right:-18px;bottom:-7px;transform:rotate(-38deg)}
+    .scribble{position:absolute;inset:-5px;pointer-events:none;stroke:#7a60447b;stroke-width:1.4;fill:none}
+    .entry-type{display:block;color:#977455;text-transform:uppercase;letter-spacing:.16em;font-size:11px;margin-bottom:8px}
+    .entry-copy h3{font-size:clamp(26px,3vw,39px);font-weight:500;letter-spacing:-.02em;line-height:1.08;margin:0 0 8px}
+    .entry-copy p{margin:0;color:#755a46;font-size:13px;line-height:1.7;max-width:320px}
+    .journal-entry:hover .entry-copy h3{text-decoration:underline;text-decoration-color:#9b6c4988;text-underline-offset:6px}
+    .journal-ornament{display:flex;align-items:center;gap:18px;color:#987453;font-family:Georgia,serif;font-style:italic;opacity:.68;margin-top:55px;font-size:14px}
+    .journal-ornament::before{content:'';width:120px;height:1px;background:#9874536c}
+    .ribbon{position:absolute;right:10.15%;top:14px;width:clamp(56px,5.1vw,79px);height:230px;z-index:11;overflow:visible;pointer-events:none;filter:none;contain:layout}
+    .ribbon::before{content:'';position:absolute;z-index:3;top:-8px;left:11px;right:11px;height:19px;border-radius:8px 8px 4px 4px;background:linear-gradient(180deg,#6a2128,#8a2e35 50%,#5d1c26);box-shadow:0 2px 5px #0004,inset 0 1px 0 #d7a76f55}
+    .ribbon svg{width:100%;height:100%;display:block;overflow:visible}
+    /* The cloth and point are one continuous V10 path; no mismatched end cap. */
+    .image-section{position:relative;z-index:1;padding:64px 0 88px;background:transparent;content-visibility:auto;contain-intrinsic-size:auto 1100px}
+    .image-section.worlds{background:transparent;padding-top:56px}
+    .masonry{column-count:3;column-gap:16px;max-width:1320px;margin:auto;padding:0 26px}
+    .image-tile{display:block;position:relative;width:100%;break-inside:avoid;margin:0 0 18px;padding:0;border:0;background:#302b2b;overflow:hidden;box-shadow:0 9px 20px #0005;transform:rotate(var(--tilt,0deg));transition:transform .3s}
+    .image-tile:hover{transform:rotate(0deg) translateY(-3px)}
+    .image-tile img{width:100%;height:var(--image-height,280px);object-fit:cover;filter:saturate(.87) contrast(.98)}
+    .image-tile:nth-child(6n+1) img{--image-height:245px}
+    .image-tile:nth-child(6n+2) img{--image-height:405px}
+    .image-tile:nth-child(6n+3) img{--image-height:290px}
+    .image-tile:nth-child(6n+4) img{--image-height:350px}
+    .image-tile:nth-child(6n+5) img{--image-height:218px}
+    .image-tile:nth-child(6n) img{--image-height:330px}
+    .footer{position:relative;z-index:1;background:transparent;text-align:center;padding:96px 24px 130px}
+    .footer h2{font-weight:400;font-size:clamp(44px,5.8vw,78px);line-height:1.04;margin:6px 0 18px;color:#e8c28c}
+    .footer h2 em{font-style:normal;color:#f0dbbc}
+    .footer p{font-size:13px;color:#c6b7a2;margin:0 auto 20px;max-width:560px;line-height:1.8}
+    .footer .contact-kicker{font-family:Georgia,serif;font-size:14px;color:#b58e66;font-style:italic;letter-spacing:.12em}
+    .footer .email-link{display:inline-flex;align-items:center;gap:10px;font-family:Fraunces,Georgia,serif;font-size:20px;color:#f4d4a4;border-bottom:1px solid #a7795070;padding:7px 8px 12px;transition:color .2s}
+    .footer .email-link:hover{color:#fff0cd}
+    .footer .email-link svg{width:19px;height:19px;stroke:#d5a86c}
+    .footer::before{content:'✧ ─── ✦ ─── ✧';display:block;font-family:Georgia,serif;color:#b28556;font-size:16px;letter-spacing:.3em;margin-bottom:27px}
+    .footer-note{margin-top:64px!important;font-size:10px!important;color:#83766c!important;letter-spacing:.12em;text-transform:uppercase}
+
+    .overlay{position:fixed;inset:0;display:none;z-index:150;justify-content:center;align-items:center;padding:22px;background:#111014e8;backdrop-filter:blur(9px)}.overlay.open{display:flex}
+    .overlay-panel{position:relative;background:#242027;box-shadow:0 26px 80px #0008;max-width:min(1150px,94vw);max-height:92vh;overflow:auto;border:1px solid #ffffff16}
+    .overlay-panel>img{width:100%;max-height:76vh;object-fit:contain}
+    .overlay-panel>.popup-info{padding:22px 30px 26px}.overlay-panel h3{font-size:clamp(32px,4vw,51px);font-weight:400;margin:0 0 10px}.overlay-panel p{max-width:630px;color:#d8cab9;line-height:1.75;font-size:14px;margin:0}
+    .overlay-close{position:sticky;top:10px;float:right;margin:10px;border:1px solid #ffffff44;border-radius:50%;width:36px;height:36px;background:#19171ce8;color:white;font-size:24px;z-index:2}
+    @media(max-width:980px){.journal{padding:135px 18vw 145px 9vw}.journal-entry{grid-template-columns:1fr 1fr}.about-inner{gap:40px}.masonry{column-count:2}}
+    @media(max-width:760px){.topnav{padding:9px 14px;gap:15px}.logo{font-size:14px}.navlinks{gap:8px}.nav-link{gap:3px;font-size:8px;letter-spacing:.01em}.nav-polaroid{width:16px;height:22px;padding:1px 1px 4px}.about{padding:170px 23px 100px}.about-inner{grid-template-columns:1fr;max-width:520px}.portrait{max-width:340px;margin:auto}.portrait img{height:380px}.about-copy h1{font-size:59px}.canopy{top:-80px;width:86vw}.canopy.left{left:-28vw}.canopy.right{right:-28vw}.projects{padding:75px 0 90px}.journal{min-height:1000px;padding:110px 16vw 120px 9vw}.journal::before{border-image-width:90px 62px 95px 62px}.journal-entry{display:block}.journal-entry .entry-copy{padding:14px 4px}.journal-list{gap:24px}.journal-intro h2{font-size:38px}.ribbon{top:48px;right:8.2%;width:42px}.masonry{column-count:2;column-gap:12px;padding:0 17px}.image-tile{margin-bottom:12px}.section-heading{padding:0 22px}.toast{right:10px;left:10px;top:66px;text-align:center}}
+    @media(max-width:520px){.logo{display:none}.topnav{justify-content:center}.navlinks{gap:14px}.nav-link{font-size:9px}.masonry{column-count:1}.memory-photo{min-width:140px;padding:6px 6px 14px}.journal{padding:90px 17vw 125px 11vw}.journal-entry h3{font-size:27px}.canopy{top:-10px;width:75vw}.about-inner{padding-top:90px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.memory-photo,.canopy,.light-ambient,.falling-leaf{transition:none!important;will-change:auto!important}}
+
+    @media(max-width:1080px){.autumn-arch{top:-150px}.about-inner{padding-top:110px}.image-tile:nth-child(n) img{height:var(--image-height,280px)}}
+    @media(max-width:760px){.autumn-arch{top:-100px;left:-18vw;width:136vw}.about{padding-top:165px;overflow:visible}.about-inner{padding-top:75px}.image-section .section-heading{padding:0 22px;margin-bottom:23px}.image-tile:nth-child(6n+1) img{--image-height:220px}.image-tile:nth-child(6n+2) img{--image-height:330px}.image-tile:nth-child(6n+3) img{--image-height:240px}.image-tile:nth-child(6n+4) img{--image-height:280px}.image-tile:nth-child(6n+5) img{--image-height:200px}.image-tile:nth-child(6n) img{--image-height:280px}}
+    @media(max-width:520px){.autumn-arch{top:-72px;left:-24vw;width:148vw}.about-inner{padding-top:65px}.about{padding:145px 23px 80px}.image-tile:nth-child(6n+1) img{--image-height:210px}.image-tile:nth-child(6n+2) img{--image-height:295px}.image-tile:nth-child(6n+3) img{--image-height:190px}.image-tile:nth-child(6n+4) img{--image-height:255px}.image-tile:nth-child(6n+5) img{--image-height:225px}.image-tile:nth-child(6n) img{--image-height:260px}.toast{right:10px;left:auto;top:62px;min-width:0;max-width:210px;text-align:left}}
+    @media(prefers-reduced-motion:reduce){.autumn-arch{transform:none!important}}
+
+/* V9 — return to the V6 photo-to-About transition while preserving V7 illustration. */
+.hero{
+  height:265vh;
+  background:linear-gradient(180deg,#1a191d,#211d22 55%,#1a1a1f);
+  z-index:1;
+}
+.photo-stage::after{height:22vh;background:linear-gradient(transparent,#1a1a1faa)}
+.photo-vignette{background:linear-gradient(transparent,#1a1a1f)}
+.season{z-index:1;isolation:isolate;background:transparent}
+.about{
+  min-height:800px;
+  padding:190px clamp(20px,7vw,110px) 135px;
+  background:linear-gradient(180deg,#211f24ed 0%,#201f24ef 50%,#1c1b20 100%);
+  overflow:visible;
+}
+.about::before{inset:0;background:radial-gradient(ellipse at 74% 15%,#d8a3631a,transparent 50%)}
+/* The trees now sit at the start of About as in V6; V7 artwork, shape and density remain unchanged. */
+.autumn-arch{
+  top:-95px;left:-2.5vw;width:105vw;
+  transform:translate3d(0,var(--arch-parallax,0px),0);
+}
+.about-inner{padding-top:66px}
+/* Keep the page-image edges exposed and let the journal grow naturally for 6 entries. */
+.journal{min-height:1780px}
+.journal::after{content:none!important;display:none!important}
+.journal-intro{
+  padding:8px 0 32px;
+  max-width:570px;
+  margin:0 auto 0;
+  text-align:center;
+  position:relative;
+  transform:translateX(36px);
+}
+.journal-intro h2{margin:0;letter-spacing:-.03em}
+@media(max-width:1080px){
+  .autumn-arch{top:-92px;left:-2.5vw;width:105vw}
+  .about-inner{padding-top:74px}
+}
+@media(max-width:760px){
+  .about{padding:170px 23px 100px}
+  .autumn-arch{top:-54px;left:-18vw;width:136vw}
+  .about-inner{padding-top:75px}
+  .journal{min-height:1750px}
+  .journal-intro{transform:translateX(13px)}
+}
+@media(max-width:520px){
+  .autumn-arch{top:-42px;left:-24vw;width:148vw}
+  .about-inner{padding-top:65px}
+  .journal{min-height:1760px}
+  .journal-intro{transform:translateX(7px);padding-top:3px}
+}
+
+/* Preserve the photographs right up to the autumn canopy and remove background seams. */
+.hero{background:transparent;height:244vh}
+.photo-stage::after{background:linear-gradient(transparent,rgba(26,26,31,.15))}
+.photo-vignette{background:linear-gradient(transparent,rgba(26,26,31,.12))}
+.about{background:transparent}
+
+/* Final transition fix: sticky photos scroll into the tree canopy without an empty band or section overlay. */
+body{overflow-x:clip}
+.photo-stage::after,.photo-vignette,.about::before{display:none!important}
+  
+/* V12: memory photographs are static on the document; no JS transforms or sticky repaint. */
+.hero{height:192vh!important;position:relative;overflow:visible;background:transparent}
+.photo-stage{position:relative!important;top:auto!important;height:100%!important;overflow:visible!important;isolation:auto!important}
+.memory-photo{transform:rotate(var(--rot))!important;will-change:auto!important}
+.hero.is-animating .memory-photo{will-change:auto!important}
+.photo-stage::after,.photo-vignette{display:none!important}
+/* The new full-length 6-project parchment retains its painted edges at natural scale. */
+.journal::before{border-image-source:url('assets/journal_long_clean.webp')!important}
+
+@media(max-width:760px){.hero{height:184vh!important}}
+@media(prefers-reduced-motion:reduce){.falling-leaf{transition:none!important}}
+  .journal-entry[id]{scroll-margin-top:35vh;}
+</style>
+</head>
+<body>
+<div class="light-ambient" id="light-ambient" aria-hidden="true">
+  <svg viewBox="0 0 1440 1080" preserveAspectRatio="xMidYMin slice">
+    <defs>
+      <radialGradient id="source"><stop offset="0%" stop-color="#ffe4b1" stop-opacity=".74"/><stop offset="29%" stop-color="#eac389" stop-opacity=".3"/><stop offset="72%" stop-color="#ffbf66" stop-opacity="0"/></radialGradient>
+      <linearGradient id="beam"><stop offset="0" stop-color="#ffe6b4" stop-opacity=".52"/><stop offset=".27" stop-color="#f6c681" stop-opacity=".19"/><stop offset="1" stop-color="#ffcb78" stop-opacity="0"/></linearGradient>
+      <filter id="beamblur"><feGaussianBlur stdDeviation="20"/></filter>
+      <filter id="sourceblur"><feGaussianBlur stdDeviation="38"/></filter>
+    </defs>
+    <g filter="url(#beamblur)">
+      <path d="M1380 -80 L-270 410 L-270 695 Z" fill="url(#beam)" opacity=".42"/>
+      <path d="M1360 -85 L-280 810 L-280 1010 Z" fill="url(#beam)" opacity=".21"/>
+      <path d="M1375 -60 L130 1060 L330 1060 Z" fill="url(#beam)" opacity=".48"/>
+      <path d="M1380 -55 L750 1060 L970 1060 Z" fill="url(#beam)" opacity=".5"/>
+      <path d="M1395 -45 L1055 1060 L1160 1060 Z" fill="url(#beam)" opacity=".28"/>
+    </g>
+    <ellipse cx="1370" cy="-32" rx="520" ry="430" fill="url(#source)" filter="url(#sourceblur)"/>
+  </svg>
+</div>
+<div class="grain"></div>
+<nav class="topnav" aria-label="Portfolio sections">
+  <a class="logo" href="#hero">Anaelle Kaplan</a>
+  <div class="navlinks">
+    <a class="nav-link" data-memory="about" href="#about"><span class="nav-polaroid"><img src="assets/girl_autumn.webp" alt=""></span>About</a>
+    <a class="nav-link" data-memory="projects" href="#projects"><span class="nav-polaroid"><img src="assets/fantasy_ruins.webp" alt=""></span>Projects</a>
+    <a class="nav-link" data-memory="stills" href="#stills"><span class="nav-polaroid"><img src="assets/stills_woods.webp" alt=""></span>Stills</a>
+    <a class="nav-link" data-memory="worlds" href="#worlds"><span class="nav-polaroid"><img src="assets/world_cozy.webp" alt=""></span>Worlds</a>
+  </div>
+</nav>
+<div class="toast" id="toast" role="status" aria-live="polite"><span class="toast-symbol" aria-hidden="true">✧</span><span class="toast-lines"><small>New memory found</small><strong id="toast-title">About</strong></span></div>
+<header class="hero" id="hero" aria-label="A cascade of cinematic memories">
+  <div class="photo-stage" id="photo-stage"></div>
+  <div class="photo-vignette"></div>
+</header>
+<div class="season" id="season">
+  <div class="falling-layer" id="falling-layer" aria-hidden="true"></div>
+  <section class="about" id="about">
+    <div class="autumn-arch" id="autumn-arch" aria-hidden="true"><img src="assets/autumn_tree_arch.webp" alt=""></div>
+    <div class="about-inner">
+      <div class="portrait"><img src="assets/girl_autumn.webp" alt="Placeholder portrait in golden autumn trees"></div>
+      <div class="about-copy">
+        <h1>Hi, I'm <em>Anaelle.</em></h1>
+        <p>I'm a filmmaker, game creator and storyteller drawn to growing up, finding belonging, and the strange magic hiding in ordinary places.</p>
+        <p>I like making things that feel lived in — whether it's a film, a game, or a place someone can get lost in.</p>
+        <div class="tiny-tags"><span>Cinematography</span><span>Game design</span><span>Worldbuilding</span></div>
+        <div class="tools"><h2 class="tools-label">A few tools I use</h2><ul class="tools-list"><li><em>Unity</em></li><li><em>Figma</em></li><li><em>Premiere Pro</em></li><li><em>After Effects</em></li><li><em>ChatGPT</em></li></ul></div>
+      </div>
+    </div>
+  </section>
+  <section class="projects" id="projects">
+    <h2 class="section-heading">Projects</h2>
+    <div class="book-wrap">
+      <div class="journal" id="journal">
+        <div class="ribbon" id="ribbon" aria-hidden="true">
+          <svg id="ribbon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 230" preserveAspectRatio="none">
+            <defs><linearGradient id="velvet" x1="0" x2="1"><stop offset="0" stop-color="#62212a"/><stop offset=".3" stop-color="#a83b3d"/><stop offset=".67" stop-color="#75232e"/><stop offset="1" stop-color="#4e1723"/></linearGradient></defs>
+            <path id="ribbon-shadow" fill="#3d1a1bc2" transform="translate(4 5)"/>
+            <path id="ribbon-body" fill="url(#velvet)" stroke="#d39b58" stroke-width="2"/>
+            <path id="ribbon-trim" stroke="#ffce79a0" stroke-width="1.3" fill="none"/>
+            <g transform="translate(35 49)"><path d="M0 -17 L6 -5 L17 0 L6 6 L0 17 L-6 6 L-17 0 L-6 -5 Z" fill="none" stroke="#d8ac70" stroke-width="2"/><circle r="5" stroke="#d8ac70" fill="none"/></g>
+          </svg>
+        </div>
+        <div class="journal-intro"><div class="overline">Field notes · selected works</div><h2>Projects</h2></div>
+        <div class="journal-list">
+          <a id="journal-trust-the-plan" class="journal-entry" href="projects/trust-the-plan.html" data-kind="Short film" data-name="Trust the Plan" data-image="assets/friends_sunset.webp" data-description="A coming-of-age story about friendship, the fear of replacement, and the worlds we create together.">
+            <span class="sketch-photo" style="--tilt:-.7deg"><img src="assets/friends_sunset.webp" alt="Friends watching a golden sunset, placeholder film image"><svg class="scribble" viewBox="0 0 600 340" preserveAspectRatio="none"><path d="M10 7 Q200 0 592 10 L597 329 Q260 338 9 329 Z"/></svg></span>
+            <span class="entry-copy"><span class="entry-type">Short film</span><h3>Trust the Plan</h3><p>A story about friendship and growing up.</p></span>
+          </a>
+          <a id="journal-between-the-trees" class="journal-entry" href="projects/between-the-trees.html" data-kind="Game design" data-name="Between the Trees" data-image="assets/fantasy_ruins.webp" data-description="A placeholder for a game project: environments, fantasy storytelling, and immersive exploration.">
+            <span class="sketch-photo" style="--tilt:.8deg"><img src="assets/fantasy_ruins.webp" alt="Fantasy ruins, placeholder game project"><svg class="scribble" viewBox="0 0 600 340" preserveAspectRatio="none"><path d="M6 11 Q280 2 594 9 L598 330 Q200 337 6 331 Z"/></svg></span>
+            <span class="entry-copy"><span class="entry-type">Video game</span><h3>Between the Trees</h3><p>Somewhere between adventure and memory.</p></span>
+          </a>
+          <a id="journal-a-place-to-return-to" class="journal-entry" href="projects/a-place-to-return-to.html" data-kind="World design" data-name="A Place to Return To" data-image="assets/cottage_game.webp" data-description="A placeholder for cozy Minecraft builds, imagined villages, and game environments.">
+            <span class="sketch-photo" style="--tilt:-.6deg"><img src="assets/cottage_game.webp" alt="Warm lantern-lit house, placeholder world design"><svg class="scribble" viewBox="0 0 600 340" preserveAspectRatio="none"><path d="M9 6 Q300 1 590 7 L597 326 Q295 343 8 329 Z"/></svg></span>
+            <span class="entry-copy"><span class="entry-type">Worldbuilding</span><h3>A Place to Return To</h3><p>Little worlds with stories of their own.</p></span>
+          </a>
+          <a id="journal-dragon-forest-scene" class="journal-entry" href="projects/dragon-forest-scene.html" data-kind="3D / craft" data-name="Dragon Forest Scene" data-image="assets/world_falls.webp" data-description="A small illuminated fantasy forest scene made through 3D modeling, printing, and physical craft.">
+            <span class="sketch-photo" style="--tilt:.4deg"><img src="assets/world_falls.webp" alt="Enchanted forest, placeholder physical project"><svg class="scribble" viewBox="0 0 600 340" preserveAspectRatio="none"><path d="M11 9 Q350 0 590 9 L594 329 Q250 337 8 326 Z"/></svg></span>
+            <span class="entry-copy"><span class="entry-type">Creative project</span><h3>Dragon Forest Scene</h3><p>One small fantasy world, built by hand.</p></span>
+          </a>
+          <a id="journal-last-summer-tape" class="journal-entry" href="projects/last-summer-tape.html" data-kind="Short film" data-name="Last Summer Tape" data-image="assets/stills_people.webp" data-description="A placeholder film about summer memories, growing up, and the places we remember.">
+            <span class="sketch-photo" style="--tilt:-.5deg"><img src="assets/stills_people.webp" alt="Sunlit cinematic placeholder for a short film"><svg class="scribble" viewBox="0 0 600 340" preserveAspectRatio="none"><path d="M11 9 Q250 0 590 8 L596 327 Q280 339 8 330 Z"/></svg></span>
+            <span class="entry-copy"><span class="entry-type">Short film</span><h3>Last Summer Tape</h3><p>Some summers stay with you.</p></span>
+          </a>
+          <a id="journal-lantern-paths" class="journal-entry" href="projects/lantern-paths.html" data-kind="World design" data-name="Lantern Paths" data-image="assets/world_minecraft.webp" data-description="A placeholder for cozy Minecraft builds, imagined villages, and game environments.">
+            <span class="sketch-photo" style="--tilt:.6deg"><img src="assets/world_minecraft.webp" alt="Cozy game-world placeholder"><svg class="scribble" viewBox="0 0 600 340" preserveAspectRatio="none"><path d="M7 11 Q290 2 594 9 L597 331 Q190 338 7 327 Z"/></svg></span>
+            <span class="entry-copy"><span class="entry-type">Worldbuilding</span><h3>Lantern Paths</h3><p>Warm windows and worlds worth wandering through.</p></span>
+          </a>
+        </div>
+        <div class="journal-ornament">to be continued</div>
+      </div>
+    </div>
+  </section>
+</div>
+<section class="image-section" id="stills">
+  <h2 class="section-heading">Stills</h2>
+  <div class="masonry" id="stills-gallery"></div>
+</section>
+<section class="image-section worlds" id="worlds">
+  <h2 class="section-heading">Worldbuilding</h2>
+  <div class="masonry" id="worlds-gallery"></div>
+</section>
+<footer class="footer" id="contact"><div class="contact-kicker">Every good story begins somewhere</div><h2>Let's make <em>something new.</em></h2><p>Have a story, a world, or a collaboration in mind? I'd love to hear about it.</p>
+    <a class="email-link" href="mailto:your-email@example.com?subject=Let's%20make%20something%20new"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="2.5" y="5" width="19" height="14" rx="1"/><path d="M3 6l9 7 9-7"/></svg><span>your-email@example.com</span></a>
+    <p class="footer-note">Portfolio concept · placeholder imagery & contact</p></footer>
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Image or project detail">
+  <div class="overlay-panel"><button class="overlay-close" id="close-overlay" aria-label="Close">×</button><img id="overlay-image" alt="Expanded artwork"><div class="popup-info"><h3 id="overlay-title"></h3><p id="overlay-text"></p></div></div>
+</div>
+<script>
+(() => {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const photos = [
+    ['orange_sunset.webp','5%','8vh','24vw','-8deg',1.01,'4 / 3'],
+    ['friends_sunset.webp','34%','6vh','31vw','5deg',1.06,'5 / 3'],
+    ['cinema_faces.webp','76%','18vh','23vw','-5deg',1.17,'4 / 3'],
+    ['portrait.webp','13%','57vh','23vw','4deg',1.11,'4 / 3'],
+    ['warm_field.webp','51%','54vh','24vw','-7deg',1.24,'4 / 3'],
+    ['stills_tower.webp','77%','74vh','20vw','6deg',1.15,'4 / 3'],
+    ['stills_woods.webp','-2%','101vh','26vw','4deg',1.09,'5 / 3'],
+    ['friendship.webp','34%','108vh','28vw','-6deg',1.25,'4 / 3'],
+    ['lake_sunset.webp','70%','118vh','25vw','6deg',1.13,'5 / 3'],
+    ['girl_autumn.webp','11%','156vh','24vw','-7deg',1.22,'4 / 3'],
+    ['stills_people.webp','47%','160vh','33vw','3deg',1.36,'5 / 3'],
+    ['cottage_game.webp','82%','163vh','20vw','-4deg',1.13,'4 / 3']
+  ];
+  const stage = document.getElementById('photo-stage');
+  photos.forEach(([file,left,top,w,rot,speed,aspect]) => {
+    const div=document.createElement('div');div.className='memory-photo';
+    div.style.cssText=`--left:${left};--top:${top};--w:${w};--rot:${rot};--aspect:${aspect};`;
+    div.dataset.speed=speed;
+    const img=document.createElement('img');img.src='assets/'+file;img.alt='A warm cinematic memory';img.loading=(parseFloat(top)<90?'eager':'lazy');img.decoding='async';
+    div.appendChild(img);stage.appendChild(div);
+  });
+  const gallery = {
+    stills:['stills_woods.webp','friends_sunset.webp','stills_tower.webp','portrait.webp','orange_sunset.webp','stills_people.webp','girl_autumn.webp','warm_field.webp','cinema_faces.webp'],
+    worlds:['world_minecraft.webp','world_falls.webp','world_cozy.webp','world_mountain.webp','fantasy_ruins.webp','cottage_game.webp','world_falls.webp','world_minecraft.webp','world_cozy.webp']
+  };
+  Object.entries(gallery).forEach(([id, images])=>{
+    const el=document.getElementById(id+'-gallery');
+    images.forEach((file,i)=>{
+      const b=document.createElement('button');b.className='image-tile';b.style.setProperty('--tilt',((i%5)-2)*.34+'deg');b.type='button';b.setAttribute('aria-label','View image '+(i+1));
+      const img=document.createElement('img');img.src='assets/'+file;img.loading='lazy';img.decoding='async';img.alt=id==='stills'?'Placeholder cinematic film still':'Placeholder fantasy or block-built game world';
+      b.appendChild(img);b.addEventListener('click',()=>showOverlay(img.src,id==='stills'?'Stills':'Worldbuilding',''));el.appendChild(b);
+    });
+  });
+  const overlay=document.getElementById('overlay'), overlayImage=document.getElementById('overlay-image'), overlayTitle=document.getElementById('overlay-title'), overlayText=document.getElementById('overlay-text');
+  function showOverlay(src,title,text){overlayImage.src=src;overlayTitle.textContent=title;overlayText.textContent=text;overlayText.style.display=text?'block':'none';overlay.classList.add('open');document.body.style.overflow='hidden'}
+  function hideOverlay(){overlay.classList.remove('open');document.body.style.overflow=''}
+  // Individual projects now open their own static HTML pages. Gallery lightboxes still use showOverlay.
+  document.getElementById('close-overlay').addEventListener('click',hideOverlay);
+  overlay.addEventListener('click',e=>{if(e.target===overlay)hideOverlay()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')hideOverlay()});
+  // The memory collection lives directly in the site navigation; no XP, no mandatory exploration.
+  const found=new Set();const toast=document.getElementById('toast');let toastTimeout;
+  const obs = new IntersectionObserver(entries=>entries.forEach(entry=>{
+    if(!entry.isIntersecting||found.has(entry.target.id))return;
+    found.add(entry.target.id);
+    const link=document.querySelector(`[data-memory="${entry.target.id}"]`);
+    if(link){link.classList.add('found');document.getElementById('toast-title').textContent=link.textContent.trim();toast.classList.add('show');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>toast.classList.remove('show'),1800)}
+  }),{threshold:.22});
+  ['about','projects','stills','worlds'].forEach(id=>obs.observe(document.getElementById(id)));
+  // Original pixel-art falling leaves travel between the canopy and the top of the illustrated journal.
+  const season=document.getElementById('season'), about=document.getElementById('about'), journal=document.getElementById('journal');
+  const leaves=document.getElementById('falling-layer');
+  const leafInfo=[];
+  const leafArt=['assets/leaf_0.webp','assets/leaf_1.webp','assets/leaf_2.webp','assets/leaf_3.webp','assets/leaf_4.webp','assets/leaf_5.webp','assets/leaf_6.webp'];
+  for(let i=0;i<16;i++){
+    const leaf=document.createElement('span');leaf.className='falling-leaf';
+    const x=(i<8?3+i*7.0:55+(i-8)*6.2);leaf.style.setProperty('--x',x+'%');
+    leaf.style.setProperty('--size',(23+(i%4)*5)+'px');
+    leaf.innerHTML='<img src="'+leafArt[i%leafArt.length]+'" alt="">';
+    const launches=[.02,.23,.08,.32,.13,.01,.28,.17,.39,.11,.25,.05,.33,.16,.04,.29];
+    const durations=[.59,.58,.7,.55,.61,.64,.53,.66,.54,.72,.55,.68,.52,.6,.74,.58];
+    leaves.appendChild(leaf);leafInfo.push({el:leaf,x,originY:32+(i%6)*18,landingOffset:7+(i%4)*13,drift:((i*19)%23)-11,turn:(i%2?1:-1)*(72+i*9),start:launches[i],duration:durations[i]});
+  }
+
+  // Optimized scroll renderer: cache static geometry and update only visible effects.
+  // Restore the exact subtle V10 wave as one continuous SVG (body + pointed end).
+  // Precompute a small set of ribbon shapes whenever layout changes; scroll only selects frames.
+  const ribbon=document.getElementById('ribbon');
+  const ribbonSVG=document.getElementById('ribbon-svg');
+  const ribbonBody=document.getElementById('ribbon-body');
+  const ribbonShadow=document.getElementById('ribbon-shadow');
+  const ribbonTrim=document.getElementById('ribbon-trim');
+  let ribbonFrames=[];
+  const arch=document.getElementById('autumn-arch');
+  const light=document.getElementById('light-ambient');
+  const hero=document.getElementById('hero');
+  let geometry;
+  let lastRibbonHeight=-1;
+  let lastLightOffset=NaN;
+  let seasonAnimating=false;
+  let pending=false;
+  let lastScrollY=NaN;
+
+
+
+  // V10 geometry: a softly waving 44px ribbon with one integrated triangular point.
+  function ribbonShape(height,phase){
+    const seg=12, right=[], left=[];
+    for(let i=0;i<=seg;i++){
+      const y=i*(height-29)/seg;
+      const amp=Math.min(1,i/4)*2.9;
+      const center=35+Math.sin(y/73+phase)*amp;
+      right.push([center+22,y]);left.push([center-22,y]);
+    }
+    const body='M '+left[0].join(' ')+' L '+right[0].join(' ')+
+      right.slice(1).map(pt=>' L '+pt.join(' ')).join('')+
+      ' L 35 '+height+' '+left.slice().reverse().map(pt=>' L '+pt.join(' ')).join('')+' Z';
+    const innerRight=right.map(([x,y])=>[x-4,y]);
+    const innerLeft=left.map(([x,y])=>[x+4,y]);
+    const trim='M '+innerRight[0].join(' ')+innerRight.slice(1).map(pt=>' L '+pt.join(' ')).join('')+
+      ' L 35 '+(height-10)+' '+innerLeft.slice().reverse().map(pt=>' L '+pt.join(' ')).join('');
+    return {body,trim};
+  }
+  const ribbonStep=20; // px: update at most once per small scroll interval
+  function cacheRibbonShapes(){
+    const heightMax=Math.max(230,230+geometry.journalHeight-300);
+    const count=Math.ceil((heightMax-230)/ribbonStep);
+    ribbonFrames=Array.from({length:count+1},(_,i)=>{
+      const height=Math.min(heightMax,230+i*ribbonStep);
+      const progress=count ? i/count : 0;
+      const {body,trim}=ribbonShape(height,progress*3.5);
+      return {height,body,trim};
+    });
+    lastRibbonHeight=-1;
+  }
+
+  function measure(){
+    const y=window.scrollY;
+    const rectTop=el=>el.getBoundingClientRect().top+y;
+    const journalTop=rectTop(journal);
+    const seasonTop=rectTop(season);
+    geometry={
+      heroTop:rectTop(hero), heroHeight:hero.offsetHeight,
+      aboutTop:rectTop(about), aboutHeight:about.offsetHeight,
+      seasonTop, journalTop, journalHeight:journal.offsetHeight,
+      fallRange:Math.max(1,journalTop-seasonTop-140),
+      ribbonRange:Math.max(300,journal.offsetHeight-window.innerHeight*.22)
+    };
+    cacheRibbonShapes();
+  }
+  function schedule(){
+    if(!pending){pending=true;requestAnimationFrame(renderScroll)}
+  }
+  function renderScroll(){
+    pending=false;
+    if(!geometry)measure();
+    const y=window.scrollY;
+    const vh=window.innerHeight;
+    if(y===lastScrollY)return;
+    lastScrollY=y;
+    const g=geometry;
+
+    // Static photographs: browser native scrolling, zero per-scroll photo work.
+
+    // Sunlight stays gentle and moves only one CSS pixel for every ~22px scrolled.
+    if(!reduced){
+      const l=-Math.round(y*.045);
+      if(l!==lastLightOffset){lastLightOffset=l;light.style.setProperty('--light-y',l+'px')}
+    }
+
+    const inAbout=y<g.aboutTop+g.aboutHeight+vh*.3 && y+vh>g.aboutTop-vh*.3;
+    if(inAbout&&!reduced){
+      const progress=clamp((y+vh*.3-g.aboutTop)/g.aboutHeight,0,1);
+      arch.style.setProperty('--arch-parallax',Math.round(progress*26)+'px');
+    }
+
+    const inSeason=y<g.journalTop+g.journalHeight+vh*.15 && y+vh>g.seasonTop-vh*.1;
+    if(inSeason!==seasonAnimating){seasonAnimating=inSeason;season.classList.toggle('is-animating',inSeason)}
+    if(inSeason&&!reduced){
+      const progress=clamp((y+vh*.55-g.seasonTop)/g.fallRange,0,1);
+      const journalOffset=g.journalTop-g.seasonTop;
+      for(let i=0;i<leafInfo.length;i++){
+        const info=leafInfo[i];
+        const leafProgress=clamp((progress-info.start)/info.duration,0,1);
+        const ease=1-Math.pow(1-leafProgress,2.35);
+        const destY=journalOffset+28+info.landingOffset;
+        const yy=info.originY+(destY-info.originY)*ease;
+        const xx=info.drift*Math.sin(leafProgress*Math.PI*1.7+(i*.5));
+        info.el.style.transform=`translate3d(${xx.toFixed(1)}px,${yy.toFixed(1)}px,0) rotate(${(info.turn*leafProgress).toFixed(1)}deg)`;
+      }
+    }
+
+    // Only change ribbon graphics near the journal and when a cached frame changes.
+    // This avoids the separate, misaligned V12 tip and any SVG path calculations on scroll.
+    if(y+vh>g.journalTop-vh*.25 && y<g.journalTop+g.journalHeight+vh*.25){
+      const progress=clamp((y+vh*.53-g.journalTop)/g.ribbonRange,0,1);
+      const continuous=230+(g.journalHeight-300)*progress;
+      const index=Math.max(0,Math.min(ribbonFrames.length-1,
+        Math.round((continuous-230)/ribbonStep)));
+      if(index!==lastRibbonHeight){
+        lastRibbonHeight=index;
+        const frame=ribbonFrames[index];
+        ribbon.style.height=frame.height+'px';
+        ribbonSVG.setAttribute('viewBox',`0 0 70 ${frame.height}`);
+        ribbonBody.setAttribute('d',frame.body);
+        ribbonShadow.setAttribute('d',frame.body);
+        ribbonTrim.setAttribute('d',frame.trim);
+      }
+    }
+  }
+  window.addEventListener('scroll',schedule,{passive:true});
+  window.addEventListener('resize',()=>{measure();lastScrollY=NaN;schedule()},{passive:true});
+  window.addEventListener('load',()=>{measure();lastScrollY=NaN;schedule()});
+  if(document.fonts) document.fonts.ready.then(()=>{measure();lastScrollY=NaN;schedule()});
+  // Read geometric measurements once per change, not in every scroll frame.
+  const resizeObserver=new ResizeObserver(()=>{measure();lastScrollY=NaN;schedule()});
+  [hero,about,journal].forEach(el=>resizeObserver.observe(el));
+  measure();schedule();
+})();
+</script>
+
+<script>
+/* Returning from a project page should reveal the project that was just opened. */
+(() => {
+  function focusLinkedEntry() {
+    const hash = decodeURIComponent(window.location.hash.slice(1));
+    if (!/^journal-[a-z0-9-]+$/.test(hash)) return;
+    const target = document.getElementById(hash);
+    if (!target) return;
+    target.scrollIntoView({ block: 'center', inline: 'nearest', behavior: 'instant' });
+  }
+  window.addEventListener('load', () => requestAnimationFrame(focusLinkedEntry));
+  window.addEventListener('pageshow', () => requestAnimationFrame(focusLinkedEntry));
+  window.addEventListener('hashchange', () => requestAnimationFrame(focusLinkedEntry));
+})();
+</script>
+</body>
+</html>
