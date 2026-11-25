@@ -16,6 +16,7 @@
     button,a{font:inherit;color:inherit}button{cursor:pointer}a{text-decoration:none}
     img{display:block;width:100%}.serif,h1,h2,h3{font-family:Fraunces,Georgia,serif}
     :focus-visible{outline:3px solid #f3c281;outline-offset:3px}
+    [hidden]{display:none!important}
     .light-ambient{position:fixed;inset:-4vh -5vw -10vh;z-index:0;pointer-events:none;opacity:.92;transform:translate3d(0,var(--light-y,0px),0);mix-blend-mode:screen;will-change:transform}
     .light-ambient svg{width:100%;height:100%;display:block}
     .grain{pointer-events:none;position:fixed;inset:0;opacity:.06;z-index:8;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 150 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='150' height='150' filter='url(%23f)' opacity='.24'/%3E%3C/svg%3E")}
@@ -281,9 +282,9 @@ body{overflow-x:clip}
         </div>
         <div class="journal-intro"><div class="overline">Field notes · selected works</div><h2>Projects</h2></div>
         <div class="journal-list">
-          <a id="journal-trust-the-plan" class="journal-entry" href="projects/trust-the-plan.html" data-kind="Short film" data-name="Trust the Plan" data-image="assets/friends_sunset.webp" data-description="A coming-of-age story about friendship, the fear of replacement, and the worlds we create together.">
+          <a id="journal-trust-the-plan" class="journal-entry" href="projects/trust-the-plan.html" data-kind="Video Game" data-name="Trust The Plan" data-image="assets/friends_sunset.webp" data-description="A coming-of-age story about friendship, the fear of replacement, and the worlds we create together.">
             <span class="sketch-photo" style="--tilt:-.7deg"><img src="assets/friends_sunset.webp" alt="Friends watching a golden sunset, placeholder film image"><svg class="scribble" viewBox="0 0 600 340" preserveAspectRatio="none"><path d="M10 7 Q200 0 592 10 L597 329 Q260 338 9 329 Z"/></svg></span>
-            <span class="entry-copy"><span class="entry-type">Short film</span><h3>Trust the Plan</h3><p>A story about friendship and growing up.</p></span>
+            <span class="entry-copy"><span class="entry-type">Video Game</span><h3>Trust The Plan</h3><p>A narrative-driven game combining live-action cutscenes with strategy gameplay.</p></span>
           </a>
           <a id="journal-between-the-trees" class="journal-entry" href="projects/between-the-trees.html" data-kind="Game design" data-name="Between the Trees" data-image="assets/fantasy_ruins.webp" data-description="A placeholder for a game project: environments, fantasy storytelling, and immersive exploration.">
             <span class="sketch-photo" style="--tilt:.8deg"><img src="assets/fantasy_ruins.webp" alt="Fantasy ruins, placeholder game project"><svg class="scribble" viewBox="0 0 600 340" preserveAspectRatio="none"><path d="M6 11 Q280 2 594 9 L598 330 Q200 337 6 331 Z"/></svg></span>
@@ -546,5 +547,6 @@ body{overflow-x:clip}
   window.addEventListener('hashchange', () => requestAnimationFrame(focusLinkedEntry));
 })();
 </script>
+<script src="home-content.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,67 @@
+{
+  "site_name": "Anaelle Kaplan",
+  "about_heading_prefix": "Hi, I'm",
+  "about_heading_highlight": "Anaelle.",
+  "about_paragraphs": [
+    "I'm a filmmaker, game creator and storyteller drawn to growing up, finding belonging, and the strange magic hiding in ordinary places.",
+    "I like making things that feel lived in — whether it's a film, a game, or a place someone can get lost in."
+  ],
+  "portrait": "/assets/girl_autumn.webp",
+  "creative_fields": [
+    "Cinematography",
+    "Game design",
+    "Worldbuilding"
+  ],
+  "tools": [
+    "Unity",
+    "Figma",
+    "Premiere Pro",
+    "After Effects",
+    "ChatGPT"
+  ],
+  "contact_kicker": "Every good story begins somewhere",
+  "contact_heading_prefix": "Let's make",
+  "contact_heading_highlight": "something new.",
+  "contact_text": "Have a story, a world, or a collaboration in mind? I'd love to hear about it.",
+  "contact_email": "your-email@example.com",
+  "nav_about_image": "/assets/girl_autumn.webp",
+  "nav_projects_image": "/assets/fantasy_ruins.webp",
+  "nav_stills_image": "/assets/stills_woods.webp",
+  "nav_worlds_image": "/assets/world_cozy.webp",
+  "memories": [
+    "/assets/orange_sunset.webp",
+    "/assets/friends_sunset.webp",
+    "/assets/cinema_faces.webp",
+    "/assets/portrait.webp",
+    "/assets/warm_field.webp",
+    "/assets/stills_tower.webp",
+    "/assets/stills_woods.webp",
+    "/assets/friendship.webp",
+    "/assets/lake_sunset.webp",
+    "/assets/girl_autumn.webp",
+    "/assets/stills_people.webp",
+    "/assets/cottage_game.webp"
+  ],
+  "stills": [
+    "/assets/stills_woods.webp",
+    "/assets/friends_sunset.webp",
+    "/assets/stills_tower.webp",
+    "/assets/portrait.webp",
+    "/assets/orange_sunset.webp",
+    "/assets/stills_people.webp",
+    "/assets/girl_autumn.webp",
+    "/assets/warm_field.webp",
+    "/assets/cinema_faces.webp"
+  ],
+  "worlds": [
+    "/assets/world_minecraft.webp",
+    "/assets/world_falls.webp",
+    "/assets/world_cozy.webp",
+    "/assets/world_mountain.webp",
+    "/assets/fantasy_ruins.webp",
+    "/assets/cottage_game.webp",
+    "/assets/world_falls.webp",
+    "/assets/world_minecraft.webp",
+    "/assets/world_cozy.webp"
+  ]
+}

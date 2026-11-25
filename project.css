@@ -28,3 +28,9 @@ h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:400}h1{font-size:clamp(5
 @media(max-width:800px){.info-row{grid-template-columns:1fr;gap:16px}.gallery{columns:2}.topnav-links{gap:14px}.wrapper{padding:32px 18px 72px}.back{margin-bottom:28px}.more{flex-direction:column;align-items:start}.category{margin-bottom:13px}}
 @media(max-width:480px){.gallery{columns:2;column-gap:10px}.gallery button{margin-bottom:10px}.topnav-links a:nth-child(2){display:none}.logo{font-size:16px}h1{font-size:49px}.film-frame{margin:0 -8px}.video-caption{font-size:10px}.gallery-section{padding-top:52px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.gallery img{transition:none}}
+
+/* Optional hosted-video embed, same cinematic frame as the MP4 player. */
+.film-frame iframe{display:block;width:100%;height:100%;border:0}
+.film-frame .empty-video{display:flex;align-items:center;justify-content:center;height:100%;color:#c3a57d;font-family:Georgia,serif;font-style:italic;text-align:center;padding:18px}
+
+[hidden]{display:none!important}

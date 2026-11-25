@@ -1,29 +1,30 @@
 [
   {
     "slug": "trust-the-plan",
-    "title": "Trust the Plan",
-    "type": "Short Film",
-    "tag": "Coming of age · Storytelling",
-    "subtitle": "A story about friendship and growing up.",
+    "title": "Trust The Plan",
+    "type": "Video Game",
+    "tag": "Narrative game · Live-action cutscenes · Strategy",
+    "subtitle": "A story about friendship, imagination, and the fear of being left behind.",
     "description": [
-      "A coming-of-age story about friendship, belonging, and the worlds we create together. This page is a placeholder for the finished film, its production details, and the decisions behind its visual language.",
-      "The finished page can include a trailer or full film, a short synopsis, your role in the production, and selected frames that capture the atmosphere of the story."
+      "Trust The Plan is a narrative-driven video game that combines live-action cutscenes with turn-based strategy gameplay. Between battles, a coming-of-age story unfolds through the characters and their changing friendships.",
+      "The project explores how imagination and gameplay can reveal what characters struggle to say aloud. Players experience both the fictional adventure and the relationships unfolding around it."
     ],
-    "image": "friends_sunset.webp",
+    "image": "/assets/friends_sunset.webp",
     "gallery": [
-      "friends_sunset.webp",
-      "stills_people.webp",
-      "cinema_faces.webp",
-      "warm_field.webp",
-      "portrait.webp",
-      "orange_sunset.webp"
+      "/assets/friends_sunset.webp",
+      "/assets/stills_people.webp",
+      "/assets/cinema_faces.webp",
+      "/assets/warm_field.webp",
+      "/assets/portrait.webp",
+      "/assets/orange_sunset.webp"
     ],
-    "external": {
-      "label": "YouTube · example link",
-      "url": "https://www.youtube.com/",
-      "note": "Example destination — replace with the actual film URL."
-    },
-    "video": "videos/trust-the-plan.mp4"
+    "video": "/videos/trust-the-plan.mp4",
+    "summary": "A narrative-driven video game combining live-action cutscenes with strategy gameplay.",
+    "video_caption": "Temporary animated placeholder · Replace with the game demo",
+    "embed_url": "",
+    "external_label": "",
+    "external_url": "",
+    "external_note": ""
   },
   {
     "slug": "between-the-trees",
@@ -35,21 +36,22 @@
       "A placeholder for a narrative game built around exploration, environmental storytelling, and the feeling of discovering something just beyond the familiar.",
       "Use this page to share your gameplay trailer, the core idea behind the game, and a gallery of characters, environments, and development work."
     ],
-    "image": "fantasy_ruins.webp",
+    "image": "/assets/fantasy_ruins.webp",
     "gallery": [
-      "fantasy_ruins.webp",
-      "world_mountain.webp",
-      "world_falls.webp",
-      "stills_woods.webp",
-      "world_cozy.webp",
-      "cottage_game.webp"
+      "/assets/fantasy_ruins.webp",
+      "/assets/world_mountain.webp",
+      "/assets/world_falls.webp",
+      "/assets/stills_woods.webp",
+      "/assets/world_cozy.webp",
+      "/assets/cottage_game.webp"
     ],
-    "external": {
-      "label": "itch.io · example link",
-      "url": "https://itch.io/",
-      "note": "Example destination — replace with the actual game page."
-    },
-    "video": "videos/between-the-trees.mp4"
+    "video": "/videos/between-the-trees.mp4",
+    "summary": "Somewhere between adventure and memory.",
+    "video_caption": "Temporary animated placeholder · Replace with your project video",
+    "embed_url": "",
+    "external_label": "",
+    "external_url": "",
+    "external_note": ""
   },
   {
     "slug": "a-place-to-return-to",
@@ -61,17 +63,22 @@
       "An exploration of spaces designed to feel lived in, from little houses and paths to places that suggest stories without explaining them.",
       "The video area can hold a short environment flythrough, while the gallery can show wide establishing views, close-up details, and different stages of the build."
     ],
-    "image": "cottage_game.webp",
+    "image": "/assets/cottage_game.webp",
     "gallery": [
-      "cottage_game.webp",
-      "world_cozy.webp",
-      "world_minecraft.webp",
-      "world_mountain.webp",
-      "world_falls.webp",
-      "fantasy_ruins.webp"
+      "/assets/cottage_game.webp",
+      "/assets/world_cozy.webp",
+      "/assets/world_minecraft.webp",
+      "/assets/world_mountain.webp",
+      "/assets/world_falls.webp",
+      "/assets/fantasy_ruins.webp"
     ],
-    "external": null,
-    "video": "videos/a-place-to-return-to.mp4"
+    "video": "/videos/a-place-to-return-to.mp4",
+    "summary": "Little worlds with stories of their own.",
+    "video_caption": "Temporary animated placeholder · Replace with your project video",
+    "embed_url": "",
+    "external_label": "",
+    "external_url": "",
+    "external_note": ""
   },
   {
     "slug": "dragon-forest-scene",
@@ -83,17 +90,22 @@
       "A small fantasy scene featuring an illuminated lantern, a sleeping dragon, and an old ruin. The original build explores how miniature environments can suggest a story through a few carefully placed details.",
       "This page can feature a short demonstration of the finished object alongside process photographs, sketches, 3D modelling work, and final close-ups."
     ],
-    "image": "world_falls.webp",
+    "image": "/assets/world_falls.webp",
     "gallery": [
-      "world_falls.webp",
-      "fantasy_ruins.webp",
-      "cottage_game.webp",
-      "world_cozy.webp",
-      "world_mountain.webp",
-      "stills_woods.webp"
+      "/assets/world_falls.webp",
+      "/assets/fantasy_ruins.webp",
+      "/assets/cottage_game.webp",
+      "/assets/world_cozy.webp",
+      "/assets/world_mountain.webp",
+      "/assets/stills_woods.webp"
     ],
-    "external": null,
-    "video": "videos/dragon-forest-scene.mp4"
+    "video": "/videos/dragon-forest-scene.mp4",
+    "summary": "One small fantasy world, built by hand.",
+    "video_caption": "Temporary animated placeholder · Replace with your project video",
+    "embed_url": "",
+    "external_label": "",
+    "external_url": "",
+    "external_note": ""
   },
   {
     "slug": "last-summer-tape",
@@ -105,17 +117,22 @@
       "An example page for a film about how a place can feel completely different once you know you are leaving it behind.",
       "Your final film page might include a trailer or complete short, a few lines about the story, your cinematography approach, and a selection of your favourite shots."
     ],
-    "image": "stills_people.webp",
+    "image": "/assets/stills_people.webp",
     "gallery": [
-      "stills_people.webp",
-      "friendship.webp",
-      "orange_sunset.webp",
-      "friends_sunset.webp",
-      "daisies.webp",
-      "lake_sunset.webp"
+      "/assets/stills_people.webp",
+      "/assets/friendship.webp",
+      "/assets/orange_sunset.webp",
+      "/assets/friends_sunset.webp",
+      "/assets/daisies.webp",
+      "/assets/lake_sunset.webp"
     ],
-    "external": null,
-    "video": "videos/last-summer-tape.mp4"
+    "video": "/videos/last-summer-tape.mp4",
+    "summary": "Some summers stay with you.",
+    "video_caption": "Temporary animated placeholder · Replace with your project video",
+    "embed_url": "",
+    "external_label": "",
+    "external_url": "",
+    "external_note": ""
   },
   {
     "slug": "lantern-paths",
@@ -127,20 +144,21 @@
       "A placeholder collection of cozy game spaces, handmade villages, lantern-lit trails, and small details that make an imagined world feel like home.",
       "A future version could use a short Minecraft flythrough or gameplay recording, followed by images of the builds from different angles and at different times of day."
     ],
-    "image": "world_minecraft.webp",
+    "image": "/assets/world_minecraft.webp",
     "gallery": [
-      "world_minecraft.webp",
-      "world_cozy.webp",
-      "cottage_game.webp",
-      "world_falls.webp",
-      "fantasy_ruins.webp",
-      "world_mountain.webp"
+      "/assets/world_minecraft.webp",
+      "/assets/world_cozy.webp",
+      "/assets/cottage_game.webp",
+      "/assets/world_falls.webp",
+      "/assets/fantasy_ruins.webp",
+      "/assets/world_mountain.webp"
     ],
-    "external": {
-      "label": "itch.io · example link",
-      "url": "https://itch.io/",
-      "note": "Example destination — replace with the published project if applicable."
-    },
-    "video": "videos/lantern-paths.mp4"
+    "video": "/videos/lantern-paths.mp4",
+    "summary": "Warm windows and worlds worth wandering through.",
+    "video_caption": "Temporary animated placeholder · Replace with your project video",
+    "embed_url": "",
+    "external_label": "",
+    "external_url": "",
+    "external_note": ""
   }
 ]
