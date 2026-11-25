@@ -34,3 +34,12 @@ h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:400}h1{font-size:clamp(5
 .film-frame .empty-video{display:flex;align-items:center;justify-content:center;height:100%;color:#c3a57d;font-family:Georgia,serif;font-style:italic;text-align:center;padding:18px}
 
 [hidden]{display:none!important}
+
+/* V22: retain each original image's ratio on every project detail page. */
+.gallery button img {
+  display: block;
+  width: 100%;
+  height: auto !important;
+  aspect-ratio: auto !important;
+  object-fit: contain;
+}

@@ -216,7 +216,18 @@ body{overflow-x:clip}
 @media(max-width:760px){.hero{height:184vh!important}}
 @media(prefers-reduced-motion:reduce){.falling-leaf{transition:none!important}}
   .journal-entry[id]{scroll-margin-top:35vh;}
-</style>
+
+    /* V22: preserve original photo proportions in both homepage galleries.
+       This intentionally overrides older fixed-height rules at all breakpoints. */
+    #stills-gallery .image-tile img,
+    #worlds-gallery .image-tile img {
+      display: block;
+      width: 100%;
+      height: auto !important;
+      aspect-ratio: auto !important;
+      object-fit: contain;
+    }
+  </style>
 </head>
 <body>
 <div class="light-ambient" id="light-ambient" aria-hidden="true">
