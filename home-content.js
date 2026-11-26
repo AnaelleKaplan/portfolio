@@ -1,11 +1,11 @@
 /* V20: live content from Pages CMS-managed JSON; layout/art/animations remain V19. */
 (() => {
 
-  // Fade the fixed golden-hour rays into the charcoal background at their lower edge.
+  // Keep the golden-hour rays at original intensity; soften only their very bottom edge.
   // Attached once to the ambient light itself; no animation or layout changes.
   const ambientLight = document.querySelector('.light-ambient');
   if (ambientLight) {
-    const fade = 'linear-gradient(to bottom, #000 0%, #000 38%, rgba(0,0,0,.95) 49%, rgba(0,0,0,.7) 63%, rgba(0,0,0,.35) 79%, rgba(0,0,0,.1) 91%, transparent 100%)';
+    const fade = 'linear-gradient(to bottom, #000 0%, #000 86%, rgba(0,0,0,.96) 89%, rgba(0,0,0,.78) 93%, rgba(0,0,0,.32) 97%, transparent 100%)';
     ambientLight.style.setProperty('mask-image', fade, 'important');
     ambientLight.style.setProperty('-webkit-mask-image', fade, 'important');
   }

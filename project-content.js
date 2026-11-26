@@ -1,7 +1,7 @@
 /* V20: the same Pages CMS JSON updates all individual HTML project pages. */
 (() => {
 
-  // Use a feathered rays asset; link is relative to the project HTML page.
+  // Use original-strength rays with a soft edge built into the image; do not fade the beams twice.
   // Overrides any earlier project.css background rule without replacing gallery styles.
   if (!document.querySelector('style[data-rays-fix="v27"]')) {
     const raysStyle = document.createElement('style');
@@ -10,8 +10,8 @@
       background-image: url('../assets/light_rays_feathered_v27.webp') !important;
       background-size: cover !important;
       background-position: 68% top !important;
-      -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 43%, rgba(0,0,0,.75) 67%, rgba(0,0,0,.28) 84%, transparent 100%) !important;
-      mask-image: linear-gradient(to bottom, #000 0%, #000 43%, rgba(0,0,0,.75) 67%, rgba(0,0,0,.28) 84%, transparent 100%) !important;
+      -webkit-mask-image: none !important;
+      mask-image: none !important;
     }`;
     document.head.appendChild(raysStyle);
   }
