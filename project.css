@@ -144,3 +144,14 @@ h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:400}h1{font-size:clamp(5
   .gallery:not(.justified-gallery) { columns: 1; }
   .gallery.justified-gallery { gap: 12px; }
 }
+/* HOMEPAGE LIGHT-RAY FEATHER -- paste just above </style> in index.html */
+.light-ambient {
+  -webkit-mask-image: linear-gradient(to bottom,
+    #000 0%, #000 43%, rgba(0,0,0,.9) 55%,
+    rgba(0,0,0,.55) 71%, rgba(0,0,0,.2) 85%,
+    transparent 98%);
+  mask-image: linear-gradient(to bottom,
+    #000 0%, #000 43%, rgba(0,0,0,.9) 55%,
+    rgba(0,0,0,.55) 71%, rgba(0,0,0,.2) 85%,
+    transparent 98%);
+}
