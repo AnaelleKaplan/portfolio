@@ -1,5 +1,59 @@
 /* V20: the same Pages CMS JSON updates all individual HTML project pages. */
 (() => {
+
+  /* V23: justified row layout — DOM order reads left-to-right, then top-to-bottom.
+     Every image keeps its native ratio. The row width is shared among up to three images. */
+  function setupJustifiedRows(container, itemSelector) {
+    if (!container || container.dataset.rowsReady === 'true') return;
+    container.dataset.rowsReady = 'true';
+    container.classList.add('justified-gallery');
+    let pending = false;
+    let lastWidth = -1;
+    const layout = () => {
+      pending = false;
+      const items = [...container.children].filter(node => node.matches(itemSelector));
+      if (!items.length) return;
+      const style = getComputedStyle(container);
+      const availableWidth = container.clientWidth - (parseFloat(style.paddingLeft) || 0) - (parseFloat(style.paddingRight) || 0);
+      if (availableWidth < 1) return;
+      const gap = parseFloat(style.columnGap) || 16;
+      const count = window.matchMedia('(max-width: 620px)').matches ? 1 :
+                    window.matchMedia('(max-width: 920px)').matches ? 2 : 3;
+      for (let start = 0; start < items.length; start += count) {
+        const row = items.slice(start, start + count);
+        const ratios = row.map(item => {
+          const image = item.querySelector('img');
+          return image && image.naturalWidth > 0 && image.naturalHeight > 0
+            ? image.naturalWidth / image.naturalHeight : 4 / 3;
+        });
+        const totalRatio = ratios.reduce((sum, ratio) => sum + ratio, 0);
+        const rowWidth = Math.max(1, availableWidth - gap * (row.length - 1) - 2);
+        // Incomplete final rows should not blow a single portrait up to several screen heights.
+        const maximumHeight = row.length === count ? Infinity : (count === 3 ? 540 : 640);
+        const height = Math.min(rowWidth / totalRatio, maximumHeight);
+        row.forEach((item, index) => {
+          item.style.width = `${(height * ratios[index]).toFixed(2)}px`;
+          item.style.height = `${height.toFixed(2)}px`;
+        });
+      }
+    };
+    const schedule = () => {
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(layout);
+    };
+    container.addEventListener('load', event => {
+      if (event.target.tagName === 'IMG') schedule();
+    }, true);
+    new MutationObserver(schedule).observe(container, { childList: true });
+    new ResizeObserver(() => {
+      const width = container.clientWidth;
+      if (width !== lastWidth) { lastWidth = width; schedule(); }
+    }).observe(container);
+    window.addEventListener('resize', schedule, { passive: true });
+    schedule();
+  }
+  setupJustifiedRows(document.querySelector('.gallery'), 'button');
   const root=document.body;
   const slug=root.dataset.projectSlug || new URLSearchParams(location.search).get('slug');
   if (!slug) return;
