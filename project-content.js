@@ -122,6 +122,13 @@
         const match=u.pathname.match(/\/(?:video\/)?(\d+)/);
         if(match)return `https://player.vimeo.com/video/${match[1]}`;
       }
+      if(host==='drive.google.com') {
+        // Accept shared Drive links (.../file/d/ID/view) and preview links.
+        const match=u.pathname.match(/^\/file\/d\/([a-zA-Z0-9_-]+)(?:\/|$)/);
+        const fileId=match?.[1] || (u.pathname==='/open' ? u.searchParams.get('id') : null);
+        if(fileId && /^[a-zA-Z0-9_-]+$/.test(fileId))
+          return `https://drive.google.com/file/d/${fileId}/preview`;
+      }
     }catch(_error){ /* Invalid external URL: ignore instead of embedding */ }
     return null;
   }
