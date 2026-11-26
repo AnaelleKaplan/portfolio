@@ -1,6 +1,22 @@
 /* V20: the same Pages CMS JSON updates all individual HTML project pages. */
 (() => {
 
+  // Use a feathered rays asset; link is relative to the project HTML page.
+  // Overrides any earlier project.css background rule without replacing gallery styles.
+  if (!document.querySelector('style[data-rays-fix="v27"]')) {
+    const raysStyle = document.createElement('style');
+    raysStyle.dataset.raysFix = 'v27';
+    raysStyle.textContent = `.light-layer::before {
+      background-image: url('../assets/light_rays_feathered_v27.webp') !important;
+      background-size: cover !important;
+      background-position: 68% top !important;
+      -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 43%, rgba(0,0,0,.75) 67%, rgba(0,0,0,.28) 84%, transparent 100%) !important;
+      mask-image: linear-gradient(to bottom, #000 0%, #000 43%, rgba(0,0,0,.75) 67%, rgba(0,0,0,.28) 84%, transparent 100%) !important;
+    }`;
+    document.head.appendChild(raysStyle);
+  }
+
+
   /* V24: independent gallery layout choices from Pages CMS. */
   function galleryLayoutController(container, selector) {
     if (!container) return () => {};
@@ -118,7 +134,7 @@
       }
       return;
     }
-    document.title=`${project.title} — Portfolio`;
+    document.title=`${project.title} | Anaelle Kaplan`;
     const back=`../index.html#journal-${project.slug}`;
     document.querySelectorAll('a.back, .more a, .topnav .logo, .topnav-links a:first-child').forEach(a=>a.href=back);
     const category=document.querySelector('.heading .category');

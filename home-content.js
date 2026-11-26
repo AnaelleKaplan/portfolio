@@ -1,6 +1,16 @@
 /* V20: live content from Pages CMS-managed JSON; layout/art/animations remain V19. */
 (() => {
 
+  // Fade the fixed golden-hour rays into the charcoal background at their lower edge.
+  // Attached once to the ambient light itself; no animation or layout changes.
+  const ambientLight = document.querySelector('.light-ambient');
+  if (ambientLight) {
+    const fade = 'linear-gradient(to bottom, #000 0%, #000 38%, rgba(0,0,0,.95) 49%, rgba(0,0,0,.7) 63%, rgba(0,0,0,.35) 79%, rgba(0,0,0,.1) 91%, transparent 100%)';
+    ambientLight.style.setProperty('mask-image', fade, 'important');
+    ambientLight.style.setProperty('-webkit-mask-image', fade, 'important');
+  }
+
+
   /* V24: independent gallery layout choices from Pages CMS. */
   function galleryLayoutController(container, selector) {
     if (!container) return () => {};
@@ -177,7 +187,7 @@
     // Defaults protect existing content/sites until these fields are saved in Pages CMS.
     selectStillsLayout(site.stills_layout === 'rows' ? 'rows' : 'masonry');
     selectWorldsLayout(site.worlds_layout === 'masonry' ? 'masonry' : 'rows');
-    document.title=`${site.site_name||'Portfolio'} — Stories, Stills & Worlds`;
+    // Browser title comes from <title> in index.html; don't overwrite it here.
   }
   function applyProjects(projects) {
     if(!Array.isArray(projects)) return;
