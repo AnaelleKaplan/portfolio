@@ -52,7 +52,9 @@
       "/assets/Screenshot 2026-11-25 at 22.22.22.jpg"
     ],
     "gallery_layout": "rows",
-    "video": "/videos/last-summer-tape.mp4"
+    "embed_url": "https://www.youtube.com/watch?v=_QWLOpuiFkU",
+    "external_label": "Watch on Youtube",
+    "external_url": "https://www.youtube.com/watch?v=_QWLOpuiFkU"
   },
   {
     "slug": "the-stranger",
