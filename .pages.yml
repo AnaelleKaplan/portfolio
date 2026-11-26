@@ -100,6 +100,16 @@ content:
           media: images
           multiple:
             max: 24
+      - name: stills_layout
+        label: Stills gallery appearance
+        description: Loose collage is the original look; ordered rows follows image order.
+        type: select
+        options:
+          values:
+            - name: masonry
+              label: Loose collage — staggered columns
+            - name: rows
+              label: Ordered rows — left to right
       - name: worlds
         label: Worldbuilding gallery
         type: image
@@ -107,6 +117,16 @@ content:
           media: images
           multiple:
             max: 24
+      - name: worlds_layout
+        label: Worldbuilding gallery appearance
+        description: Ordered rows follows the order of your images in Pages CMS.
+        type: select
+        options:
+          values:
+            - name: masonry
+              label: Loose collage — staggered columns
+            - name: rows
+              label: Ordered rows — left to right
   - name: projects
     label: Projects — journal and pages
     type: file
@@ -156,6 +176,16 @@ content:
           media: images
           multiple:
             max: 24
+      - name: gallery_layout
+        label: This project's gallery appearance
+        description: Choose independently for each project. Ordered rows is the default.
+        type: select
+        options:
+          values:
+            - name: masonry
+              label: Loose collage — staggered columns
+            - name: rows
+              label: Ordered rows — left to right
       - name: video
         label: Uploaded video file (optional)
         type: file
