@@ -1,59 +1,72 @@
 /* V20: live content from Pages CMS-managed JSON; layout/art/animations remain V19. */
 (() => {
 
-  /* V23: justified row layout — DOM order reads left-to-right, then top-to-bottom.
-     Every image keeps its native ratio. The row width is shared among up to three images. */
-  function setupJustifiedRows(container, itemSelector) {
-    if (!container || container.dataset.rowsReady === 'true') return;
-    container.dataset.rowsReady = 'true';
-    container.classList.add('justified-gallery');
+  /* V24: independent gallery layout choices from Pages CMS. */
+  function galleryLayoutController(container, selector) {
+    if (!container) return () => {};
+    let mode = 'masonry';
     let pending = false;
-    let lastWidth = -1;
-    const layout = () => {
+    let widthLast = -1;
+    const items = () => [...container.children].filter(el => el.matches(selector));
+    const clearSizing = () => items().forEach(item => {
+      item.style.removeProperty('width');
+      item.style.removeProperty('height');
+    });
+    function layout() {
       pending = false;
-      const items = [...container.children].filter(node => node.matches(itemSelector));
-      if (!items.length) return;
-      const style = getComputedStyle(container);
-      const availableWidth = container.clientWidth - (parseFloat(style.paddingLeft) || 0) - (parseFloat(style.paddingRight) || 0);
-      if (availableWidth < 1) return;
-      const gap = parseFloat(style.columnGap) || 16;
-      const count = window.matchMedia('(max-width: 620px)').matches ? 1 :
-                    window.matchMedia('(max-width: 920px)').matches ? 2 : 3;
-      for (let start = 0; start < items.length; start += count) {
-        const row = items.slice(start, start + count);
+      if (mode !== 'rows') return;
+      const children = items();
+      if (!children.length) return;
+      const css = getComputedStyle(container);
+      const available = container.clientWidth - (parseFloat(css.paddingLeft) || 0) - (parseFloat(css.paddingRight) || 0);
+      if (available < 1) return;
+      const gap = parseFloat(css.columnGap) || 16;
+      const columns = window.matchMedia('(max-width: 620px)').matches ? 1 :
+                      window.matchMedia('(max-width: 920px)').matches ? 2 : 3;
+      for (let start = 0; start < children.length; start += columns) {
+        const row = children.slice(start, start + columns);
         const ratios = row.map(item => {
-          const image = item.querySelector('img');
-          return image && image.naturalWidth > 0 && image.naturalHeight > 0
-            ? image.naturalWidth / image.naturalHeight : 4 / 3;
+          const img = item.querySelector('img');
+          return (img?.naturalWidth > 0 && img?.naturalHeight > 0)
+            ? img.naturalWidth / img.naturalHeight : 4 / 3;
         });
-        const totalRatio = ratios.reduce((sum, ratio) => sum + ratio, 0);
-        const rowWidth = Math.max(1, availableWidth - gap * (row.length - 1) - 2);
-        // Incomplete final rows should not blow a single portrait up to several screen heights.
-        const maximumHeight = row.length === count ? Infinity : (count === 3 ? 540 : 640);
-        const height = Math.min(rowWidth / totalRatio, maximumHeight);
-        row.forEach((item, index) => {
-          item.style.width = `${(height * ratios[index]).toFixed(2)}px`;
-          item.style.height = `${height.toFixed(2)}px`;
+        const total = ratios.reduce((sum, ratio) => sum + ratio, 0);
+        const usable = Math.max(1, available - gap * (row.length - 1) - 2);
+        // Don't let an incomplete last row become enormous.
+        const limit = row.length === columns ? Infinity : (columns === 3 ? 540 : 640);
+        const h = Math.min(usable / total, limit);
+        row.forEach((item, n) => {
+          item.style.width = (h * ratios[n]).toFixed(1) + 'px';
+          item.style.height = h.toFixed(1) + 'px';
         });
       }
-    };
-    const schedule = () => {
-      if (pending) return;
+    }
+    function schedule() {
+      if (pending || mode !== 'rows') return;
       pending = true;
       requestAnimationFrame(layout);
-    };
-    container.addEventListener('load', event => {
-      if (event.target.tagName === 'IMG') schedule();
+    }
+    container.addEventListener('load', e => {
+      if (e.target.tagName === 'IMG') schedule();
     }, true);
-    new MutationObserver(schedule).observe(container, { childList: true });
+    new MutationObserver(schedule).observe(container, {childList: true});
     new ResizeObserver(() => {
-      const width = container.clientWidth;
-      if (width !== lastWidth) { lastWidth = width; schedule(); }
+      const w = container.clientWidth;
+      if (w !== widthLast) { widthLast = w; schedule(); }
     }).observe(container);
-    window.addEventListener('resize', schedule, { passive: true });
-    schedule();
+    window.addEventListener('resize', schedule, {passive: true});
+    return next => {
+      const selected = next === 'rows' ? 'rows' : 'masonry';
+      mode = selected;
+      container.classList.toggle('justified-gallery', selected === 'rows');
+      clearSizing();
+      if (selected === 'rows') schedule();
+    };
   }
-  ['stills-gallery', 'worlds-gallery'].forEach(id => setupJustifiedRows(document.getElementById(id), '.image-tile'));
+  const selectStillsLayout = galleryLayoutController(document.getElementById('stills-gallery'), '.image-tile');
+  const selectWorldsLayout = galleryLayoutController(document.getElementById('worlds-gallery'), '.image-tile');
+  selectStillsLayout('masonry');
+  selectWorldsLayout('rows');
   const siteRoot = './';
   const validSlug = v => typeof v === 'string' && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(v);
   function media(path) {
@@ -161,6 +174,9 @@
     }
     drawGallery('stills',site.stills,'Stills');
     drawGallery('worlds',site.worlds,'Worldbuilding');
+    // Defaults protect existing content/sites until these fields are saved in Pages CMS.
+    selectStillsLayout(site.stills_layout === 'rows' ? 'rows' : 'masonry');
+    selectWorldsLayout(site.worlds_layout === 'masonry' ? 'masonry' : 'rows');
     document.title=`${site.site_name||'Portfolio'} — Stories, Stills & Worlds`;
   }
   function applyProjects(projects) {
