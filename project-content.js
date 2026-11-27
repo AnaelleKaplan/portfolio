@@ -275,3 +275,11 @@
       document.querySelector('.gallery')?.classList.add('cms-gallery-ready');
     });
 })();
+/* V31: Show the same favicon on all project pages. */
+(() => {
+  const icon = document.querySelector('link[rel="icon"]') || document.createElement('link');
+  icon.rel = 'icon';
+  icon.type = 'image/png';
+  icon.href = '../assets/favicon.png';
+  document.head.appendChild(icon);
+})();
