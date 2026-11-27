@@ -288,6 +288,32 @@ body{overflow-x:clip}
 .light-layer::before {
   background-image: url('../assets/light_rays_soft.webp');
 }
+/* V29 — Paste inside index.html's <style> near the end, before the closing style tag.
+   Prevent original placeholder photos/text from flashing before Pages CMS data loads. */
+.nav-polaroid img,
+.about .portrait img,
+.memory-photo img,
+.journal-entry .sketch-photo img {
+  opacity: 0 !important;
+  transition: opacity .24s ease !important;
+}
+.nav-polaroid img[data-cms-image-ready="true"],
+.about .portrait img[data-cms-image-ready="true"],
+.memory-photo img[data-cms-image-ready="true"],
+.journal-entry .sketch-photo img[data-cms-image-ready="true"] {
+  opacity: 1 !important;
+}
+html:not(.cms-site-ready) .about-copy,
+html:not(.cms-site-ready) .contact-kicker,
+html:not(.cms-site-ready) .footer > h2,
+html:not(.cms-site-ready) .footer > p,
+html:not(.cms-projects-ready) .journal-list {
+  visibility: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-polaroid img, .about .portrait img, .memory-photo img,
+  .journal-entry .sketch-photo img {transition:none!important;}
+}
 
 </style>
 </head>
