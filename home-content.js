@@ -99,6 +99,27 @@
     return siteRoot + encoded.join('/');
   }
   const put = (node, text) => { if(node && text !== undefined && text !== null) node.textContent = String(text); };
+  // A CMS image stays invisible until its chosen file loads; old placeholder srcs
+  // in the static HTML can never flash on screen before content/site.json arrives.
+  function setCmsImage(img, source) {
+    if (!img) return;
+    delete img.dataset.cmsImageReady;
+    const next = source || img.getAttribute('src');
+    if (!next) return;
+    let expected;
+    try { expected = new URL(next, document.baseURI).href; }
+    catch { return; }
+    const ready = () => {
+      if (img.src === expected && img.naturalWidth > 0) img.dataset.cmsImageReady = 'true';
+    };
+    img.addEventListener('load', ready, {once:true});
+    if(source) img.src = source;
+    if(img.complete) ready();
+  }
+  function showExistingImagesAfterFailure() {
+    document.querySelectorAll('.nav-polaroid img, .about .portrait img, .memory-photo img, .journal-entry .sketch-photo img')
+      .forEach(img => setCmsImage(img, null));
+  }
   const visibleList = v => Array.isArray(v) ? v.filter(x => typeof x === 'string' && x.trim()) : [];
 
   async function loadJson(url) {
@@ -152,7 +173,7 @@
       visibleList(site.about_paragraphs).forEach(v=>{const p=document.createElement('p');p.textContent=v;tags?.before(p)});
     }
     const portrait=media(site.portrait);
-    if (portrait) document.querySelector('.about .portrait img').src=portrait;
+    setCmsImage(document.querySelector('.about .portrait img'), portrait);
     fillWords(document.querySelector('.tiny-tags'), site.creative_fields);
     fillWords(document.querySelector('.tools-list'), site.tools, 'li');
     put(document.querySelector('.contact-kicker'), site.contact_kicker);
@@ -172,15 +193,17 @@
     for(const [field,id] of [['nav_about_image','about'],['nav_projects_image','projects'],['nav_stills_image','stills'],['nav_worlds_image','worlds']]) {
       const source=media(site[field]);
       const img=document.querySelector(`.nav-link[data-memory="${id}"] img`);
-      if (img && source) img.src=source;
+      setCmsImage(img, source);
     }
     if (Array.isArray(site.memories)) {
       const photos=[...document.querySelectorAll('.memory-photo')];
       const sources=site.memories.slice(0,photos.length).map(media);
       photos.forEach((el,i)=>{
         const src=sources[i];el.hidden=!src;
-        if (src) el.querySelector('img').src=src;
+        if (src) setCmsImage(el.querySelector('img'), src);
       });
+    } else {
+      document.querySelectorAll('.memory-photo img').forEach(img => setCmsImage(img, null));
     }
     drawGallery('stills',site.stills,'Stills');
     drawGallery('worlds',site.worlds,'Worldbuilding');
@@ -188,6 +211,7 @@
     selectStillsLayout(site.stills_layout === 'rows' ? 'rows' : 'masonry');
     selectWorldsLayout(site.worlds_layout === 'masonry' ? 'masonry' : 'rows');
     // Browser title comes from <title> in index.html; don't overwrite it here.
+    document.documentElement.classList.add('cms-site-ready');
   }
   function applyProjects(projects) {
     if(!Array.isArray(projects)) return;
@@ -209,7 +233,8 @@
       link.dataset.name=p.title;
       link.dataset.description=p.summary||'';
       const thumbnail=media(p.image);
-      if(thumbnail) {link.dataset.image=thumbnail;link.querySelector('.sketch-photo img').src=thumbnail;}
+      if(thumbnail) link.dataset.image=thumbnail;
+      setCmsImage(link.querySelector('.sketch-photo img'), thumbnail);
       put(link.querySelector('.entry-type'),p.type||'Project');
       put(link.querySelector('.entry-copy h3'),p.title);
       put(link.querySelector('.entry-copy p'),p.summary||p.subtitle||'');
@@ -219,6 +244,7 @@
       count++;
     }
     parent.replaceChildren(fragment);
+    document.documentElement.classList.add('cms-projects-ready');
     // Maintain correct bookmark geometry if number of projects changes.
     // Layout observers in the original homepage update it automatically.
     if(window.location.hash.startsWith('#journal-')) {
@@ -228,6 +254,14 @@
       });
     }
   }
-  loadJson('content/site.json').then(applySite).catch(err=>console.warn('Using built-in site content:',err));
-  loadJson('content/projects.json').then(applyProjects).catch(err=>console.warn('Using built-in project content:',err));
+  loadJson('content/site.json').then(applySite).catch(err=>{
+    console.warn('Using built-in site content:',err);
+    document.documentElement.classList.add('cms-site-ready');
+    showExistingImagesAfterFailure();
+  });
+  loadJson('content/projects.json').then(applyProjects).catch(err=>{
+    console.warn('Using built-in project content:',err);
+    document.documentElement.classList.add('cms-projects-ready');
+    document.querySelectorAll('.journal-entry .sketch-photo img').forEach(img=>setCmsImage(img,null));
+  });
 })();

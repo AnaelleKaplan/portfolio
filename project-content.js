@@ -17,6 +17,16 @@
   }
 
 
+  // The poster uses its natural aspect ratio when no playable video exists.
+  if (!document.querySelector('style[data-project-poster="v29"]')) {
+    const style=document.createElement('style');
+    style.dataset.projectPoster='v29';
+    style.textContent = `.film-frame.cms-poster-only {aspect-ratio:auto;background:transparent;}
+      .film-frame.cms-poster-only img.cms-project-poster {display:block;width:100%;height:auto;object-fit:contain;}
+      .film-frame[hidden],.video-caption[hidden] {display:none!important;}`;
+    document.head.appendChild(style);
+  }
+
   /* V24: independent gallery layout choices from Pages CMS. */
   function galleryLayoutController(container, selector) {
     if (!container) return () => {};
@@ -123,7 +133,7 @@
         if(match)return `https://player.vimeo.com/video/${match[1]}`;
       }
       if(host==='drive.google.com') {
-        // Accept shared Drive links (.../file/d/ID/view) and preview links.
+        // Supports Drive /file/d/FILE_ID/view and /preview links.
         const match=u.pathname.match(/^\/file\/d\/([a-zA-Z0-9_-]+)(?:\/|$)/);
         const fileId=match?.[1] || (u.pathname==='/open' ? u.searchParams.get('id') : null);
         if(fileId && /^[a-zA-Z0-9_-]+$/.test(fileId))
@@ -178,32 +188,55 @@
     if(note){note.hidden=!validExternal||!project.external_note;put(note,project.external_note||'');}
 
     const frame=document.querySelector('.film-frame');
+    const caption=document.querySelector('.video-caption');
     const poster=media(project.image);
     const embed=embedUrl(project.embed_url);
-    if(embed){
-      const iframe=document.createElement('iframe');
-      iframe.src=embed; iframe.title=`${project.title} video`;iframe.loading='lazy';
-      iframe.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-      iframe.allowFullscreen=true;
-      frame.replaceChildren(iframe);
-    } else if(media(project.video)) {
-      let video=frame.querySelector('video');
-      if(!video){video=document.createElement('video');video.controls=true;video.playsInline=true;video.preload='metadata';frame.replaceChildren(video);}
-      if(poster)video.poster=poster;
-      video.setAttribute('aria-label',`${project.title} video`);
-      const path=media(project.video);
-      const src=video.querySelector('source')||document.createElement('source');
-      src.src=path;src.type=path.toLowerCase().split('?')[0].endsWith('.webm')?'video/webm':'video/mp4';
-      video.replaceChildren(src);video.load();
-    } else {
-      const placeholder=document.createElement('div');placeholder.className='empty-video';
-      placeholder.textContent='A film or game demo will appear here soon.';
-      frame.replaceChildren(placeholder);
+    const videoPath=media(project.video);
+    if(frame) {
+      frame.hidden=false;
+      frame.classList.remove('cms-poster-only');
+      if(embed){
+        const iframe=document.createElement('iframe');
+        iframe.src=embed; iframe.title=`${project.title} video`;iframe.loading='lazy';
+        iframe.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        iframe.allowFullscreen=true;
+        frame.replaceChildren(iframe);
+      } else if(videoPath){
+        const video=document.createElement('video');
+        video.controls=true;video.playsInline=true;video.preload='metadata';
+        if(poster) video.poster=poster;
+        video.setAttribute('aria-label',`${project.title} video`);
+        const source=document.createElement('source');
+        source.src=videoPath;
+        source.type=videoPath.toLowerCase().split('?')[0].endsWith('.webm')?'video/webm':'video/mp4';
+        video.append(source);
+        frame.replaceChildren(video);
+        video.load();
+      } else if(poster) {
+        // Without a video, the project image itself is the hero. No trailer placeholder.
+        const image=document.createElement('img');
+        image.src=poster;
+        image.alt=`${project.title} project image`;
+        image.decoding='async';
+        image.className='cms-project-poster';
+        frame.classList.add('cms-poster-only');
+        frame.replaceChildren(image);
+      } else {
+        frame.replaceChildren();
+        frame.hidden=true; // No poster or video: omit the whole media area.
+      }
+      frame.classList.add('cms-media-ready');
     }
-    const caption=document.querySelector('.video-caption');
-    if(caption){const children=caption.querySelectorAll('span');
-      if(children[0])put(children[0],embed?'WATCH VIDEO': 'PROJECT VIDEO');
-      if(children[1])put(children[1],project.video_caption || '');
+    if(caption){
+      // A still photograph does not need a misleading 'PROJECT VIDEO' label.
+      const hasVideo=Boolean(embed||videoPath);
+      caption.hidden=!hasVideo;
+      if(hasVideo){
+        const children=caption.querySelectorAll('span');
+        if(children[0])put(children[0],embed?'WATCH VIDEO':'PROJECT VIDEO');
+        if(children[1])put(children[1],project.video_caption || '');
+      }
+      caption.classList.add('cms-media-ready');
     }
     const gallery=document.querySelector('.gallery');
     if(gallery && Array.isArray(project.gallery)){
@@ -218,6 +251,9 @@
       // Every project may independently choose its layout in Pages CMS.
       selectProjectLayout(project.gallery_layout === 'masonry' ? 'masonry' : 'rows');
     }
+    document.querySelector('.heading')?.classList.add('cms-project-ready');
+    document.querySelector('.info-row')?.classList.add('cms-project-ready');
+    document.querySelector('.gallery')?.classList.add('cms-gallery-ready');
   }
   fetch('../content/site.json',{cache:'no-cache'}).then(res=>res.ok?res.json():null).then(site=>{
     if(site && site.site_name){
@@ -228,5 +264,14 @@
   fetch('../content/projects.json',{cache:'no-cache'})
     .then(res=>{if(!res.ok)throw Error('Projects not found');return res.json()})
     .then(apply)
-    .catch(err=>console.warn('Using built-in project fallback:',err));
+    .catch(err=>{
+      console.warn('Unable to load project details:',err);
+      put(document.querySelector('.heading h1'),'Project temporarily unavailable');
+      put(document.querySelector('.heading .subtitle'),'Please refresh this page in a moment.');
+      document.querySelector('.heading')?.classList.add('cms-project-ready');
+      document.querySelector('.film-frame')?.setAttribute('hidden','');
+      document.querySelector('.video-caption')?.setAttribute('hidden','');
+      document.querySelector('.gallery')?.replaceChildren();
+      document.querySelector('.gallery')?.classList.add('cms-gallery-ready');
+    });
 })();
