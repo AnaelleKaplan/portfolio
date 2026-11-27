@@ -314,6 +314,47 @@ html:not(.cms-projects-ready) .journal-list {
   .nav-polaroid img, .about .portrait img, .memory-photo img,
   .journal-entry .sketch-photo img {transition:none!important;}
 }
+/* V30 HOME PAGE RECOVERY -- paste at END of the existing <style>, just above </style>.
+   This overrides V29's unsafe permanent-hiding rules. Do not remove other CSS. */
+
+/* Essential content must never depend on a successful CMS request. */
+html:not(.cms-site-ready) .about-copy,
+html:not(.cms-site-ready) .contact-kicker,
+html:not(.cms-site-ready) .footer > h2,
+html:not(.cms-site-ready) .footer > p,
+html:not(.cms-projects-ready) .journal-list {
+  visibility: visible !important;
+}
+
+/* Override V29's opacity:0!important, which can otherwise leave every image blank. */
+.nav-polaroid img,
+.about .portrait img,
+.memory-photo img,
+.journal-entry .sketch-photo img {
+  opacity: 1 !important;
+}
+
+/* Keep OLD placeholder images hidden while CMS replaces the image paths.
+   If CMS fails, reveal the fallback photographs after 3s instead of staying blank. */
+html:not(.cms-site-ready) .nav-polaroid img,
+html:not(.cms-site-ready) .about .portrait img,
+html:not(.cms-site-ready) .memory-photo img,
+html:not(.cms-projects-ready) .journal-entry .sketch-photo img {
+  visibility: hidden;
+  animation: cms-recovery-fallback 0s 3s forwards;
+}
+
+@keyframes cms-recovery-fallback {
+  to { visibility: visible; }
+}
+
+/* Fade in the CMS-selected images when their image URLs are ready. */
+@media (prefers-reduced-motion: reduce) {
+  .nav-polaroid img, .about .portrait img,
+  .memory-photo img, .journal-entry .sketch-photo img {
+    transition: none !important;
+  }
+}
 
 </style>
 </head>
